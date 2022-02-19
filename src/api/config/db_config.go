@@ -12,11 +12,12 @@ const (
 	MONGO_URI = "mongodb://localhost:27017"
 )
 
-func Connect() error {
-	_, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(MONGO_URI))
+func Connect() (*mongo.Database, error) {
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(MONGO_URI))
 	if err != nil {
-		return err
+		return nil, err
 	}
-	log.Println("Successfully connected to DB!")
-	return nil
+	db := client.Database("Flay")
+	log.Printf("Successfully connected to %s DB!", db.Name())
+	return db, nil
 }
