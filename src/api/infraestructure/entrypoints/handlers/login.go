@@ -19,9 +19,9 @@ func (handler *Login) Handle(c *gin.Context) {
 	ctx := context.TODO()
 
 	request := login.Request{}
-	if err := c.Bind(&request); err != nil {
+	if err := c.ShouldBindJSON(&request); err != nil {
 		log.Printf("Error binding request: %s", err.Error())
-		c.JSON(http.StatusBadRequest, err.Error())
+		c.JSON(http.StatusUnprocessableEntity, err.Error())
 		return
 	}
 	result, err := handler.LoginUseCase.Execute(ctx, request)
