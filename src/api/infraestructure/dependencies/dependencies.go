@@ -6,7 +6,6 @@ import (
 	database "flay-api-v3.0/src/api/config"
 	login "flay-api-v3.0/src/api/core/usecases"
 
-	"flay-api-v3.0/src/api/infraestructure/authentication"
 	"flay-api-v3.0/src/api/infraestructure/entrypoints"
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
 	store "flay-api-v3.0/src/api/infraestructure/repositories"
@@ -27,12 +26,10 @@ func Start() *HandlerContainer {
 	loginRepository := store.LoginRepository{
 		DBClient: db,
 	}
-	authService := authentication.AuthService{}
 
 	//Usecase injection
 	loginUseCase := &login.Implementation{
 		LoginRepository: &loginRepository,
-		AuthService:     &authService,
 	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
