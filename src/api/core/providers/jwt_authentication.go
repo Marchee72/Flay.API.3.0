@@ -1,7 +1,9 @@
 package providers
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"flay-api-v3.0/src/api/core/entities"
+)
 
 type Authentication interface {
-	CreateToken(userId primitive.ObjectID) (string, error)
+	CreateToken(user entities.UserLogin) (string, error)
 }

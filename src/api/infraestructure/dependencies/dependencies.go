@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	database "flay-api-v3.0/src/api/config"
-	login "flay-api-v3.0/src/api/core/usecases"
+	login "flay-api-v3.0/src/api/core/usecases/login"
 
 	"flay-api-v3.0/src/api/infraestructure/entrypoints"
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
@@ -12,7 +12,8 @@ import (
 )
 
 type HandlerContainer struct {
-	Login entrypoints.Handler
+	Login          entrypoints.Handler
+	BookCommonArea entrypoints.Handler
 }
 
 func Start() *HandlerContainer {
@@ -37,6 +38,7 @@ func Start() *HandlerContainer {
 	apiHandlers.Login = &handlers.Login{
 		LoginUseCase: loginUseCase,
 	}
+	apiHandlers.BookCommonArea = &handlers.BookCommonArea{}
 
 	return &apiHandlers
 }

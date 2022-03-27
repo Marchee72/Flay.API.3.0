@@ -5,6 +5,7 @@ import (
 
 	"flay-api-v3.0/src/api/core/contracts/login"
 	"flay-api-v3.0/src/api/core/providers"
+	"flay-api-v3.0/src/api/infraestructure/authentication"
 )
 
 type UseCase interface {
@@ -13,15 +14,14 @@ type UseCase interface {
 
 type Implementation struct {
 	LoginRepository providers.Login
-	AuthService     providers.Authentication
 }
 
 func (useCase *Implementation) Execute(ctx context.Context, request login.Request) (string, error) {
-	userID, err := useCase.LoginRepository.GetUserID(ctx, request)
+	user, err := useCase.LoginRepository.GetUserCredentials(ctx, request)
 	if err != nil {
 		return "", err
 	}
-	token, err := useCase.AuthService.CreateToken(*userID)
+	token, err := authentication.CreateToken(*user)
 	if err != nil {
 		return "", err
 	}

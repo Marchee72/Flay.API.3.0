@@ -1,9 +1,11 @@
 package entities
 
-import "time"
+import (
+	"flay-api-v3.0/src/api/core/constants"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type UserLogin struct {
-	UserName  string    `json:"username" bson:"username"`
-	Password  string    `json:"-" bson:"-"`
-	LastLogin time.Time `json:"last_login" bson:"last_login"`
+	ID       primitive.ObjectID `json:"ID" bson:"_id"`
+	UserType constants.UserType `json:"type" bson:"type"`
 }

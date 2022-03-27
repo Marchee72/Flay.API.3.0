@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"flay-api-v3.0/src/api/core/contracts/login"
-	loginUseCase "flay-api-v3.0/src/api/core/usecases"
+	loginUseCase "flay-api-v3.0/src/api/core/usecases/login"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,7 +16,7 @@ type Login struct {
 }
 
 func (handler *Login) Handle(c *gin.Context) {
-	ctx := context.TODO()
+	ctx := context.Background()
 
 	request := login.Request{}
 	if err := c.ShouldBindJSON(&request); err != nil {
