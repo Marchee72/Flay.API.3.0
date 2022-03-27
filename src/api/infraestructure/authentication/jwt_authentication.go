@@ -8,8 +8,8 @@ import (
 
 	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/entities"
-	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	jwt "github.com/golang-jwt/jwt"
 )
 
 const BEARER_SCHEMA = "Bearer:"
