@@ -29,7 +29,9 @@ func (handler *BookCommonArea) handle(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, err.Error())
 		return
 	}
-	handler.BookCommonAreaUseCase.Execute(request)
+	if response, err := handler.BookCommonAreaUseCase.Execute(ctx, request); err {
+
+	}
 
 	c.JSON(http.StatusOK, "SUUUUUUUU!")
 	return
