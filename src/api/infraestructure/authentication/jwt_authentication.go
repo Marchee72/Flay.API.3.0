@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"flay-api-v3.0/src/api/core/constants"
@@ -63,17 +64,20 @@ func IsAllowed(token *jwt.Token, allowedUsers []constants.UserType) bool {
 				return true
 			}
 		}
-		fmt.Printf("user not allowed for this action. User type: %s", userType)
+		fmt.Printf("user not allowed for this action. User type: %s.", userType)
 	} else if !ok {
-		fmt.Printf("an error ocurred trying to claim permissions")
+		fmt.Printf("an error ocurred trying to claim permissions.")
 	}
 	return false
 }
 
 func ExtractToken(ctx *gin.Context) (*jwt.Token, error) {
 	authHeader := ctx.GetHeader("Authorization")
-	tokenString := authHeader[len(BEARER_SCHEMA):]
-	token, err := VerifySigning(tokenString)
+	tokenString := strings.Split(authHeader, BEARER_SCHEMA)
+	if len(tokenString) != 2 {
+		return nil, errors.New("token does not implements bearer schema.")
+	}
+	token, err := VerifySigning(tokenString[1])
 	if !token.Valid {
 		return nil, errors.New("invalid authentication token.")
 	}

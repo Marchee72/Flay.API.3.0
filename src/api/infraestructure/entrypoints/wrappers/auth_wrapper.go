@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type HandlerFunc func(ctx *gin.Context) error
+type HandlerFunc func(ctx *gin.Context)
 
 // ErrorWrapper if handlerFunc return a error,then response will be composed from error's information.
 func AuthWrapper(handlerFunc HandlerFunc, ctx *gin.Context, allowedUsers []constants.UserType) {
@@ -20,5 +20,5 @@ func AuthWrapper(handlerFunc HandlerFunc, ctx *gin.Context, allowedUsers []const
 	if !authentication.IsAllowed(token, allowedUsers) {
 		ctx.JSON(http.StatusUnauthorized, "you are not allowed to perform this action.")
 	}
-	err = handlerFunc(ctx)
+	handlerFunc(ctx)
 }
