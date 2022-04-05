@@ -8,14 +8,14 @@ import (
 	"time"
 
 	"flay-api-v3.0/src/api/core/constants"
-	"flay-api-v3.0/src/api/core/entities"
+	"flay-api-v3.0/src/api/core/entities/lw"
 	"github.com/gin-gonic/gin"
 	jwt "github.com/golang-jwt/jwt"
 )
 
 const BEARER_SCHEMA = "Bearer:"
 
-func CreateToken(user entities.UserLogin) (string, error) {
+func CreateToken(user lw.UserLw) (string, error) {
 	var err error
 	//Creating Access Token
 	os.Setenv("ACCESS_SECRET", "jdnfksdmfksd") //this should be in an env file

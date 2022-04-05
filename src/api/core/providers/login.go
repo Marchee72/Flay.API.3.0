@@ -4,10 +4,10 @@ import (
 	"context"
 
 	"flay-api-v3.0/src/api/core/contracts/login"
-	"flay-api-v3.0/src/api/core/entities"
+	"flay-api-v3.0/src/api/core/entities/lw"
 )
 
 type Login interface {
-	GetUser(ctx context.Context, request login.Request) (*entities.UserLogin, error)
-	GetUserCredentials(ctx context.Context, user login.Request) (*entities.UserLogin, error)
+	GetUser(ctx context.Context, request login.Request) (*lw.UserLw, error)
+	GetUserCredentials(ctx context.Context, user login.Request) (*lw.UserLw, error)
 }
