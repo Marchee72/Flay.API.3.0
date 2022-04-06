@@ -8,6 +8,7 @@ import (
 	"flay-api-v3.0/src/api/core/constants"
 	book_common_space "flay-api-v3.0/src/api/core/contracts/book_common_area"
 	bookCommonAreaUseCase "flay-api-v3.0/src/api/core/usecases/book_common_space"
+	"flay-api-v3.0/src/api/infraestructure/authentication"
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/wrappers"
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +18,7 @@ type BookCommonArea struct {
 }
 
 func (handler *BookCommonArea) Handle(c *gin.Context) {
-	wrappers.AuthWrapper(handler.handle, c, []constants.UserType{constants.UserAdmin})
+	wrappers.AuthWrapper(handler.handle, c, []constants.UserType{constants.UserRenter})
 }
 
 func (handler *BookCommonArea) handle(c *gin.Context) {
@@ -29,7 +30,14 @@ func (handler *BookCommonArea) handle(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, err.Error())
 		return
 	}
-	if response, err := handler.BookCommonAreaUseCase.Execute(ctx, request); err {
+	claims, err := authentication.Claims(c)
+	if err != nil{
+		log.Printf("Error durin authentication: %s", err.Error())
+		c.JSON(http.StatusUnauthorized, err.Error())
+		return
+	}
+	request.UserID = claims.
+	if response, err := handler.BookCommonAreaUseCase.Execute(ctx, request); err != nil {
 
 	}
 

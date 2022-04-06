@@ -71,8 +71,8 @@ func IsAllowed(token *jwt.Token, allowedUsers []constants.UserType) bool {
 	return false
 }
 
-func ExtractToken(ctx *gin.Context) (*jwt.Token, error) {
-	authHeader := ctx.GetHeader("Authorization")
+func ExtractToken(c *gin.Context) (*jwt.Token, error) {
+	authHeader := c.GetHeader("Authorization")
 	tokenString := strings.Split(authHeader, BEARER_SCHEMA)
 	if len(tokenString) != 2 {
 		return nil, errors.New("token does not implements bearer schema.")
@@ -85,4 +85,15 @@ func ExtractToken(ctx *gin.Context) (*jwt.Token, error) {
 		return nil, err
 	}
 	return token, nil
+}
+
+func Claims(c *gin.Context) (*CustomClaims, error) {
+	token, err := ExtractToken(c)
+	if err != nil {
+		return nil, err
+	}
+	if claims, ok := token.Claims.(CustomClaims); ok {
+		return &claims, nil
+	}
+	return nil, fmt.Errorf("an error ocurred trying to claim permissions.")
 }

@@ -11,14 +11,14 @@ import (
 type HandlerFunc func(ctx *gin.Context)
 
 // ErrorWrapper if handlerFunc return a error,then response will be composed from error's information.
-func AuthWrapper(handlerFunc HandlerFunc, ctx *gin.Context, allowedUsers []constants.UserType) {
-	token, err := authentication.ExtractToken(ctx)
+func AuthWrapper(handlerFunc HandlerFunc, c *gin.Context, allowedUsers []constants.UserType) {
+	token, err := authentication.ExtractToken(c)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err)
+		c.JSON(http.StatusInternalServerError, err)
 		return
 	}
 	if !authentication.IsAllowed(token, allowedUsers) {
-		ctx.JSON(http.StatusUnauthorized, "you are not allowed to perform this action.")
+		c.JSON(http.StatusUnauthorized, "you are not allowed to perform this action.")
 	}
-	handlerFunc(ctx)
+	handlerFunc(c)
 }
