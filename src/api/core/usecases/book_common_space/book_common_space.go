@@ -14,6 +14,8 @@ type UseCase interface {
 type Implementation struct{}
 
 func (useCase *Implementation) Execute(ctx *context.Context, request book_common_space.Request) error {
-
+	//Check if user has active penalties
+	//Check if common space is abailable that day at that time
+	//Book space or return error if its not abailable
 	return errors.New("")
 }

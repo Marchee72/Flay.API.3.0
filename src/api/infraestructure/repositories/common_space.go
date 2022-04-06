@@ -6,4 +6,10 @@ type CommonSpaceRepository struct {
 	DBClient *mongo.Database
 }
 
-func (repository *CommonSpaceRepository) Book()
+func (repository *CommonSpaceRepository) Book() {
+
+}
+
+func (repository *CommonSpaceRepository) IsAbailable() (bool, error) {
+
+}
