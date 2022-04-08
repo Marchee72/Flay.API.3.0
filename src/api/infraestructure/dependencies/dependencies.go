@@ -6,15 +6,9 @@ import (
 	database "flay-api-v3.0/src/api/config"
 	login "flay-api-v3.0/src/api/core/usecases/login"
 
-	"flay-api-v3.0/src/api/infraestructure/entrypoints"
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
 	store "flay-api-v3.0/src/api/infraestructure/repositories"
 )
-
-type HandlerContainer struct {
-	Login          entrypoints.Handler
-	BookCommonArea entrypoints.Handler
-}
 
 func Start() *HandlerContainer {
 	//DB configs
@@ -24,8 +18,10 @@ func Start() *HandlerContainer {
 	}
 
 	//DB injection
+	dbContainer := NewCollectionContainer(db)
+
 	loginRepository := store.LoginRepository{
-		DBClient: db,
+		Users: dbContainer.Users,
 	}
 
 	//Usecase injection

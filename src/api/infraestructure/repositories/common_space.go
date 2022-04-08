@@ -11,5 +11,5 @@ func (repository *CommonSpaceRepository) Book() {
 }
 
 func (repository *CommonSpaceRepository) IsAbailable() (bool, error) {
-
+	return true, nil
 }

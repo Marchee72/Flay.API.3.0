@@ -11,13 +11,12 @@ import (
 )
 
 type LoginRepository struct {
-	DBClient *mongo.Database
+	Users *mongo.Collection
 }
 
 func (repository *LoginRepository) GetUser(ctx context.Context, user login.Request) (*lw.UserLw, error) {
-	coll := repository.DBClient.Collection("users")
 	var result lw.UserLw
-	err := coll.FindOne(ctx, bson.M{"username": user.Username, "password": user.Password}).Decode(&result)
+	err := repository.Users.FindOne(ctx, bson.M{"username": user.Username, "password": user.Password}).Decode(&result)
 	if err == mongo.ErrNoDocuments {
 		return nil, err
 	}
@@ -25,10 +24,9 @@ func (repository *LoginRepository) GetUser(ctx context.Context, user login.Reque
 }
 
 func (repository *LoginRepository) GetUserCredentials(ctx context.Context, user login.Request) (*lw.UserLw, error) {
-	coll := repository.DBClient.Collection("users")
 	opt := options.FindOne().SetProjection(bson.D{{"_id", 1}, {"type", 1}})
 	var result lw.UserLw
-	err := coll.FindOne(ctx, bson.M{"username": user.Username, "password": user.Password}, opt).Decode(&result)
+	err := repository.Users.FindOne(ctx, bson.M{"username": user.Username, "password": user.Password}, opt).Decode(&result)
 	if err == mongo.ErrNoDocuments {
 		return nil, err
 	}

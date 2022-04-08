@@ -31,16 +31,18 @@ func (handler *BookCommonArea) handle(c *gin.Context) {
 		return
 	}
 	claims, err := authentication.Claims(c)
-	if err != nil{
-		log.Printf("Error durin authentication: %s", err.Error())
+	if err != nil {
+		log.Printf("Error authenticating user: %s", err.Error())
 		c.JSON(http.StatusUnauthorized, err.Error())
 		return
 	}
-	request.UserID = claims.
-	if response, err := handler.BookCommonAreaUseCase.Execute(ctx, request); err != nil {
-
+	request.UserID = claims.ID
+	response, err := handler.BookCommonAreaUseCase.Execute(ctx, request)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, err)
+		return
 	}
 
-	c.JSON(http.StatusOK, "SUUUUUUUU!")
+	c.JSON(http.StatusOK, response)
 	return
 }
