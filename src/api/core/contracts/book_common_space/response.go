@@ -7,7 +7,7 @@ import (
 type Response struct {
 	Booking            booking `json:"booking"`
 	HasActivePenalties bool    `json:"has_active_penalties"`
-	Penalty
+	Penalty            penalty `json:"penalty"`
 }
 
 type booking struct {

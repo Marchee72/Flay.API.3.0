@@ -20,13 +20,13 @@ func Start() *HandlerContainer {
 	//DB injection
 	dbContainer := NewCollectionContainer(db)
 
-	loginRepository := store.LoginRepository{
+	loginRepository := store.UserRepository{
 		Users: dbContainer.Users,
 	}
 
 	//Usecase injection
 	loginUseCase := &login.Implementation{
-		LoginRepository: &loginRepository,
+		UserRepository: &loginRepository,
 	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}

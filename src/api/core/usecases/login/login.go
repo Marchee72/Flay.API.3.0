@@ -13,11 +13,11 @@ type UseCase interface {
 }
 
 type Implementation struct {
-	LoginRepository providers.Login
+	UserRepository providers.UserRepository
 }
 
 func (useCase *Implementation) Execute(ctx context.Context, request login.Request) (string, error) {
-	user, err := useCase.LoginRepository.GetUserCredentials(ctx, request)
+	user, err := useCase.UserRepository.GetUserCredentials(ctx, request)
 	if err != nil {
 		return "", err
 	}
