@@ -12,8 +12,8 @@ import (
 )
 
 type HandlerContainer struct {
-	Login          entrypoints.Handler
-	BookCommonArea entrypoints.Handler
+	Login           entrypoints.Handler
+	BookCommonSpace entrypoints.Handler
 }
 
 func Start() *HandlerContainer {
@@ -38,7 +38,7 @@ func Start() *HandlerContainer {
 	apiHandlers.Login = &handlers.Login{
 		LoginUseCase: loginUseCase,
 	}
-	apiHandlers.BookCommonArea = &handlers.BookCommonArea{}
+	apiHandlers.BookCommonSpace = &handlers.BookCommonSpace{}
 
 	return &apiHandlers
 }
