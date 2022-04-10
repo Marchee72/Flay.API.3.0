@@ -17,4 +17,8 @@ type booking struct {
 }
 
 type penalty struct {
+	PenaltyType string
+	Cause       string
+	Amount      int64
+	EndDate     time.Time
 }
