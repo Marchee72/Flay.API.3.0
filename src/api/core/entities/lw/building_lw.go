@@ -5,8 +5,8 @@ import (
 )
 
 type BuildingLw struct {
-	ID   primitive.ObjectID `json:"ID" bson:"ID"`
-	Name string             `json:"name" bson:"name"`
+	ID   primitive.ObjectID `bson:"ID"`
+	Name string             `bson:"name"`
 }
 
 func NewBuildingLw(id primitive.ObjectID, name string) BuildingLw {

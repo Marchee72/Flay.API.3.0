@@ -16,7 +16,7 @@ type PenaltyRepository struct {
 
 func (repository *PenaltyRepository) GetActivePenalties(ctx context.Context, userID primitive.ObjectID) (*entities.Penalty, error) {
 	var result entities.Penalty
-	err := repository.Penalties.FindOne(ctx, bson.M{"user_id": userID, "init_date": bson.M{"$lte": time.Now()}, "end_date": bson.M{"$gte": time.Now()}}).Decode(&result)
+	err := repository.Penalties.FindOne(ctx, bson.M{"user_id": userID, "start_date": bson.M{"$lte": time.Now()}, "end_date": bson.M{"$gte": time.Now()}}).Decode(&result)
 	if err == mongo.ErrNoDocuments {
 		return nil, err
 	}

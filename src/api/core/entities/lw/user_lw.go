@@ -6,6 +6,6 @@ import (
 )
 
 type UserLw struct {
-	ID       primitive.ObjectID `json:"ID" bson:"_id"`
-	UserType constants.UserType `json:"type" bson:"type"`
+	ID   primitive.ObjectID `bson:"id"`
+	Name constants.UserType `bson:"name"`
 }

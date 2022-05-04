@@ -7,8 +7,8 @@ import (
 )
 
 type Booking struct {
-	User        lw.UserLw
-	CommonSpace CommonSpace
-	InitDate    time.Time
-	FinishDate  time.Time
+	User        lw.UserLw   `bson:"user"`
+	CommonSpace CommonSpace `bson:"common_space"`
+	StartDate   time.Time   `bson:"start_date"`
+	FinishDate  time.Time   `bson:"finish_date"`
 }
