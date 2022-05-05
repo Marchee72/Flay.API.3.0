@@ -3,6 +3,7 @@ package authentication
 import (
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"time"
@@ -15,13 +16,14 @@ import (
 
 const BEARER_SCHEMA = "Bearer:"
 
-func CreateToken(user entities.User) (string, error) {
+func CreateToken(user entities.Credentials) (string, error) {
 	var err error
 	//Creating Access Token
 	os.Setenv("ACCESS_SECRET", "jdnfksdmfksd") //this should be in an env file
 	atClaims := CustomClaims{
 		ID:         user.ID,
 		UserType:   user.UserType,
+		Name:       user.Name,
 		Authorized: true,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
@@ -30,8 +32,7 @@ func CreateToken(user entities.User) (string, error) {
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token, err := at.SignedString([]byte(os.Getenv("ACCESS_SECRET")))
 	token = BEARER_SCHEMA + token
-	msg := fmt.Sprintf("creating credentials for user_id: &s, user_type: %s", user.ID, user.UserType)
-	fmt.Println(msg)
+	log.Printf("creating credentials for user_id: %s, user_name: %s user_type: %s", user.ID, user.Name, user.UserType)
 	if err != nil {
 		return "", err
 	}
