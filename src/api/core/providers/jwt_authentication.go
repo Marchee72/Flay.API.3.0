@@ -1,9 +1,9 @@
 package providers
 
 import (
-	"flay-api-v3.0/src/api/core/entities/lw"
+	"flay-api-v3.0/src/api/core/entities"
 )
 
 type Authentication interface {
-	CreateToken(user lw.UserLw) (string, error)
+	CreateToken(user entities.Credentials) (string, error)
 }

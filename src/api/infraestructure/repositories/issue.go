@@ -14,11 +14,33 @@ type IssueRepository struct {
 }
 
 func (repository *IssueRepository) GetUserIssues(ctx context.Context, userID primitive.ObjectID) ([]entities.Issue, error) {
-	var issues []entities.Issue
-	cursor, err := repository.Issues.Find(ctx, bson.M{"creator.id": userID})
+	filter := map[string]primitive.ObjectID{
+		"creator.id": userID,
+	}
+	issues, err := repository.getIssues(ctx, filter)
 	if err != nil {
 		return nil, err
 	}
+	return issues, nil
+}
+
+func (repository *IssueRepository) GetBuildingIssues(ctx context.Context, buildingID primitive.ObjectID) ([]entities.Issue, error) {
+	filter := map[string]primitive.ObjectID{
+		"building.id": buildingID,
+	}
+	issues, err := repository.getIssues(ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+	return issues, nil
+}
+
+func (repository *IssueRepository) getIssues(ctx context.Context, filter interface{}) ([]entities.Issue, error) {
+	cursor, err := repository.Issues.Find(ctx, filter.(bson.M))
+	if err != nil {
+		return nil, err
+	}
+	var issues []entities.Issue
 	err = cursor.All(ctx, &issues)
 	if err != mongo.ErrNoDocuments {
 		return nil, err
