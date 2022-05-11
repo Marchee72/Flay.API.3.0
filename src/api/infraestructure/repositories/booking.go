@@ -2,9 +2,11 @@ package store
 
 import (
 	"context"
+	"time"
 
 	"flay-api-v3.0/src/api/core/entities"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -18,7 +20,35 @@ func (repository *BookingRepository) Save(ctx context.Context, booking entities.
 	return err
 }
 
-func (repository *BookingRepository) IsAbailable(ctx context.Context) (bool, error) {
+func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, startDate time.Time, endDate time.Time) (bool, error) {
 	var result entities.Booking
-	err := repository.Bookings.FindOne(ctx, bson.M{"building.id": nil, "start_date": nil, "end_date": nil}).Decode(&result)
+	filter := bson.M{
+		"building.id": buildingID,
+		"$or": bson.A{
+			bson.A{"$and",
+				bson.M{"start_date": bson.M{"$gte": startDate}},
+				bson.M{"start_date": bson.M{"$lte": endDate}},
+			},
+			bson.A{"$and",
+				bson.M{"end_date": bson.M{"$gte": startDate}},
+				bson.M{"end_date": bson.M{"$lte": endDate}},
+			},
+			bson.A{"$and",
+				bson.M{"start_date": bson.M{"$lte": startDate}},
+				bson.M{"end_date": bson.M{"$gte": startDate}},
+			},
+			bson.A{"$and",
+				bson.M{"start_date": bson.M{"$lte": endDate}},
+				bson.M{"end_date": bson.M{"$gte": endDate}},
+			},
+		},
+	}
+	err := repository.Bookings.FindOne(ctx, filter).Decode(&result)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
 }
