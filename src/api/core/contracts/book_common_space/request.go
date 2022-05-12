@@ -3,12 +3,13 @@ package book_common_space
 import (
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"flay-api-v3.0/src/api/core/entities/lw"
 )
 
 type Request struct {
-	CommonSpaceID primitive.ObjectID `json:"common_space_id"`
-	UserID        primitive.ObjectID `json:"user_id"`
-	InitDate      time.Time          `json:"init_date"`
-	FinishDate    time.Time          `json:"finish_date"`
+	User        lw.UserLw        `json:"user"`
+	CommonSpace lw.CommonSpaceLw `json:"common_space_id"`
+	Builging    lw.BuildingLw    `json:"building"`
+	StartDate   time.Time        `json:"start_date"`
+	EndDate     time.Time        `json:"end_date"`
 }
