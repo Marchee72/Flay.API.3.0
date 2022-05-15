@@ -37,7 +37,7 @@ type booking struct {
 }
 
 type penalty struct {
-	PenaltyType string
-	Cause       string
-	EndDate     time.Time
+	PenaltyType string    `json:"type"`
+	Cause       string    `json:"cause"`
+	EndDate     time.Time `json:"end_date"`
 }

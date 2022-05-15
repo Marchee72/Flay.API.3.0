@@ -14,7 +14,7 @@ type IssueRepository struct {
 }
 
 func (repository *IssueRepository) GetUserIssues(ctx context.Context, userID primitive.ObjectID) ([]entities.Issue, error) {
-	filter := map[string]primitive.ObjectID{
+	filter := bson.M{
 		"creator.id": userID,
 	}
 	issues, err := repository.getIssues(ctx, filter)
@@ -25,7 +25,7 @@ func (repository *IssueRepository) GetUserIssues(ctx context.Context, userID pri
 }
 
 func (repository *IssueRepository) GetBuildingIssues(ctx context.Context, buildingID primitive.ObjectID) ([]entities.Issue, error) {
-	filter := map[string]primitive.ObjectID{
+	filter := bson.M{
 		"building.id": buildingID,
 	}
 	issues, err := repository.getIssues(ctx, filter)
@@ -35,14 +35,13 @@ func (repository *IssueRepository) GetBuildingIssues(ctx context.Context, buildi
 	return issues, nil
 }
 
-func (repository *IssueRepository) getIssues(ctx context.Context, filter interface{}) ([]entities.Issue, error) {
-	cursor, err := repository.Issues.Find(ctx, filter.(bson.M))
+func (repository *IssueRepository) getIssues(ctx context.Context, filter bson.M) ([]entities.Issue, error) {
+	cursor, err := repository.Issues.Find(ctx, filter)
 	if err != nil {
 		return nil, err
 	}
 	var issues []entities.Issue
-	err = cursor.All(ctx, &issues)
-	if err != mongo.ErrNoDocuments {
+	if err = cursor.All(ctx, &issues); err != mongo.ErrNoDocuments {
 		return nil, err
 	}
 	return issues, nil

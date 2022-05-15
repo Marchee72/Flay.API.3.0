@@ -1,0 +1,24 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('Flay');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.users.drop();
+
+// Insert a few documents into the sales collection.
+db.users.insertMany([
+  { 'username': 'user1',  'password': 'user1',  'name': 'user1',  'email': 'user1@flay.com' },
+  { 'username': 'user2',  'password': 'user2',  'name': 'user2' , 'email': 'user2@flay.com' },
+  { 'username': 'owner1', 'password': 'owner1', 'name': 'owner1', 'email': 'owner1@flay.com' },
+  { 'username': 'owner2', 'password': 'owner2', 'name': 'owner2', 'email': 'owner2@flay.com' },
+  { 'username': 'admin1', 'password': 'admin1', 'name': 'admin1', 'email': 'admin1@flay.com' },
+  { 'username': 'admin2', 'password': 'admin2', 'name': 'admin2', 'email': 'admin2@flay.com' },
+  { 'username': 'inqui1', 'password': 'inqui1', 'name': 'inqui1', 'email': 'inqui1@flay.com' },
+  { 'username': 'inqui2', 'password': 'inqui2', 'name': 'inqui2', 'email': 'inqui2@flay.com' },
+]);
+

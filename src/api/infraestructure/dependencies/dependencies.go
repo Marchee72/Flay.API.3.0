@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	database "flay-api-v3.0/src/api/config"
+	"flay-api-v3.0/src/api/core/usecases/book_common_space"
+	"flay-api-v3.0/src/api/core/usecases/get_user_bookings"
 	login "flay-api-v3.0/src/api/core/usecases/login"
 
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
@@ -20,13 +22,32 @@ func Start() *HandlerContainer {
 	//DB injection
 	dbContainer := NewCollectionContainer(db)
 
-	loginRepository := store.UserRepository{
+	userRepository := store.UserRepository{
 		Users: dbContainer.Users,
+	}
+	bookingRepository := store.BookingRepository{
+		Bookings: dbContainer.Bookings,
+	}
+	issueRepository := store.IssueRepository{
+		Issues: dbContainer.Issues,
+	}
+	penaltyRepository := store.PenaltyRepository{
+		Penalties: dbContainer.Penalties,
+	}
+	buildingRepository := store.BuildingRepository{
+		Buildings: dbContainer.Building,
 	}
 
 	//Usecase injection
 	loginUseCase := &login.Implementation{
-		UserRepository: &loginRepository,
+		UserRepository: &userRepository,
+	}
+	bookCommonSpaceUseCase := &book_common_space.Implementation{
+		PenaltyRepository: &penaltyRepository,
+		BookingRepository: &bookingRepository,
+	}
+	getUserBookingsUseCase := get_user_bookings.Implementation{
+		BookingRepository: &bookingRepository,
 	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
@@ -34,7 +55,12 @@ func Start() *HandlerContainer {
 	apiHandlers.Login = &handlers.Login{
 		LoginUseCase: loginUseCase,
 	}
-	apiHandlers.BookCommonSpace = &handlers.BookCommonSpace{}
+	apiHandlers.BookCommonSpace = &handlers.BookCommonSpace{
+		BookCommonSpaceUseCase: bookCommonSpaceUseCase,
+	}
+	apiHandlers.GetUserBookings = &handlers.GetUserBookings{
+		GetUserBookingsUseCase: getUserBookingsUseCase,
+	}
 
 	return &apiHandlers
 }

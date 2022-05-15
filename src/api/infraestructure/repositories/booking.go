@@ -20,6 +20,18 @@ func (repository *BookingRepository) Save(ctx context.Context, booking entities.
 	return err
 }
 
+func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID primitive.ObjectID) ([]entities.Booking, error) {
+	cursor, err := repository.Bookings.Find(ctx, bson.M{"user._id": userID})
+	if err != nil {
+		return nil, err
+	}
+	var response []entities.Booking
+	if err = cursor.All(ctx, response); err != nil {
+		return nil, err
+	}
+	return response, nil
+}
+
 func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, startDate time.Time, endDate time.Time) (bool, error) {
 	var result entities.Booking
 	filter := bson.M{
@@ -46,7 +58,7 @@ func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID
 	err := repository.Bookings.FindOne(ctx, filter).Decode(&result)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return false, nil
+			return true, nil
 		}
 		return false, err
 	}

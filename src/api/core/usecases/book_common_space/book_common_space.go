@@ -5,6 +5,7 @@ import (
 
 	book_common_space "flay-api-v3.0/src/api/core/contracts/book_common_space"
 	"flay-api-v3.0/src/api/core/entities"
+	"flay-api-v3.0/src/api/core/entities/lw"
 	"flay-api-v3.0/src/api/core/providers"
 )
 
@@ -37,9 +38,9 @@ func (useCase *Implementation) Execute(ctx context.Context, request book_common_
 		return &response, nil
 	}
 	booking := entities.Booking{
-		User:        request.User,
-		Building:    request.Builging,
-		CommonSpace: request.CommonSpace,
+		User:        lw.UserLw{ID: request.User.ID, Name: request.User.Name},
+		Building:    lw.BuildingLw{ID: request.Builging.ID, Name: request.Builging.Name},
+		CommonSpace: lw.CommonSpaceLw{ID: request.CommonSpace.ID, Name: request.CommonSpace.Name},
 		StartDate:   request.StartDate,
 		EndDate:     request.EndDate,
 	}
