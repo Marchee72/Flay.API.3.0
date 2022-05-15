@@ -28,15 +28,15 @@ func Start() *HandlerContainer {
 	bookingRepository := store.BookingRepository{
 		Bookings: dbContainer.Bookings,
 	}
-	issueRepository := store.IssueRepository{
-		Issues: dbContainer.Issues,
-	}
+	// issueRepository := store.IssueRepository{
+	// 	Issues: dbContainer.Issues,
+	// }
 	penaltyRepository := store.PenaltyRepository{
 		Penalties: dbContainer.Penalties,
 	}
-	buildingRepository := store.BuildingRepository{
-		Buildings: dbContainer.Building,
-	}
+	// buildingRepository := store.BuildingRepository{
+	// 	Buildings: dbContainer.Building,
+	// }
 
 	//Usecase injection
 	loginUseCase := &login.Implementation{
