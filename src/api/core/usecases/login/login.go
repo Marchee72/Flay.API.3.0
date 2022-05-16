@@ -9,22 +9,22 @@ import (
 )
 
 type UseCase interface {
-	Execute(ctx context.Context, request login.Request) (string, error)
+	Execute(ctx context.Context, request login.Request) (*string, error)
 }
 
 type Implementation struct {
 	UserRepository providers.UserRepository
 }
 
-func (useCase *Implementation) Execute(ctx context.Context, request login.Request) (string, error) {
+func (useCase *Implementation) Execute(ctx context.Context, request login.Request) (*string, error) {
 	user, err := useCase.UserRepository.GetUserCredentials(ctx, request)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	token, err := authentication.CreateToken(*user)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	return token, nil
+	return &token, nil
 
 }

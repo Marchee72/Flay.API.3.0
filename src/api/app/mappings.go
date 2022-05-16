@@ -11,4 +11,5 @@ func configureMappings(router *gin.Engine, handlers *dependencies.HandlerContain
 	api := router.Group("/api")
 	api.POST("login", handlers.Login.Handle)
 	api.POST("booking", handlers.BookCommonSpace.Handle)
+	api.GET("bookings", handlers.GetUserBookings.Handle)
 }

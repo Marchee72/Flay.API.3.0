@@ -13,6 +13,6 @@ type UserLw struct {
 func NewUserLw(lw lw.UserLw) UserLw {
 	return UserLw{
 		ID:   lw.ID,
-		Name: lw.Name,
+		Name: lw.Username,
 	}
 }

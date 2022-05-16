@@ -6,7 +6,7 @@ import (
 )
 
 type Credentials struct {
-	ID       primitive.ObjectID `bson:"id"`
-	Name     string             `bson:"name"`
+	ID       primitive.ObjectID `bson:"_id"`
+	Username string             `bson:"username"`
 	UserType constants.UserType `bson:"type"`
 }

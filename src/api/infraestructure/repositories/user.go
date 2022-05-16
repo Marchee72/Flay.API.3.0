@@ -25,10 +25,10 @@ func (repository *UserRepository) GetUser(ctx context.Context, user login.Reques
 }
 
 func (repository *UserRepository) GetUserCredentials(ctx context.Context, user login.Request) (*entities.Credentials, error) {
-	opt := options.FindOne().SetProjection(bson.D{{Key: "_id", Value: 1}, {Key: "type", Value: 1}})
+	opt := options.FindOne().SetProjection(bson.D{{Key: "_id", Value: 1}, {Key: "username", Value: 1}, {Key: "type", Value: 1}})
 	var result entities.Credentials
 	err := repository.Users.FindOne(ctx, bson.M{"username": user.Username, "password": user.Password}, opt).Decode(&result)
-	if err != mongo.ErrNoDocuments {
+	if err != nil {
 		return nil, err
 	}
 	return &result, nil

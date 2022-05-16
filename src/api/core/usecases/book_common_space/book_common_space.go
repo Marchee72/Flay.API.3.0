@@ -38,7 +38,7 @@ func (useCase *Implementation) Execute(ctx context.Context, request book_common_
 		return &response, nil
 	}
 	booking := entities.Booking{
-		User:        lw.UserLw{ID: request.User.ID, Name: request.User.Name},
+		User:        lw.UserLw{ID: request.User.ID, Username: request.User.Name},
 		Building:    lw.BuildingLw{ID: request.Builging.ID, Name: request.Builging.Name},
 		CommonSpace: lw.CommonSpaceLw{ID: request.CommonSpace.ID, Name: request.CommonSpace.Name},
 		StartDate:   request.StartDate,

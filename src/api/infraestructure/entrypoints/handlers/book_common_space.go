@@ -38,7 +38,7 @@ func (handler *BookCommonSpace) handle(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, err.Error())
 		return
 	}
-	request.User = common.NewUserLw(lw.UserLw{ID: claims.ID, Name: claims.Name})
+	request.User = common.NewUserLw(lw.UserLw{ID: claims.ID, Username: claims.Username})
 	response, err := handler.BookCommonSpaceUseCase.Execute(ctx, request)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)

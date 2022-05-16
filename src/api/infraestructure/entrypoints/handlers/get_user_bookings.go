@@ -17,7 +17,7 @@ type GetUserBookings struct {
 }
 
 func (handler *GetUserBookings) Handle(c *gin.Context) {
-	wrappers.AuthWrapper(handler.handle, c, []constants.UserType{constants.UserRenter})
+	wrappers.AuthWrapper(handler.handle, c, []constants.UserType{constants.UserRenter, constants.UserAdmin})
 }
 
 func (handler *GetUserBookings) handle(c *gin.Context) {

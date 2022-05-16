@@ -7,9 +7,9 @@ import (
 )
 
 type CustomClaims struct {
-	ID         primitive.ObjectID `json:"id"`
+	ID         primitive.ObjectID `json:"_id"`
 	UserType   constants.UserType `json:"type"`
-	Name       string             `json:"name"`
+	Username   string             `json:"username"`
 	Authorized bool               `json:"authorized"`
 	jwt.StandardClaims
 }

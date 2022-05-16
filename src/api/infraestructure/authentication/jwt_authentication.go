@@ -23,7 +23,7 @@ func CreateToken(user entities.Credentials) (string, error) {
 	atClaims := CustomClaims{
 		ID:         user.ID,
 		UserType:   user.UserType,
-		Name:       user.Name,
+		Username:   user.Username,
 		Authorized: true,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
@@ -32,7 +32,7 @@ func CreateToken(user entities.Credentials) (string, error) {
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token, err := at.SignedString([]byte(os.Getenv("ACCESS_SECRET")))
 	token = BEARER_SCHEMA + token
-	log.Printf("creating credentials for user_id: %s, user_name: %s user_type: %s", user.ID, user.Name, user.UserType)
+	log.Printf("creating credentials for user_id: %s, user_name: %s user_type: %s", user.ID, user.Username, user.UserType)
 	if err != nil {
 		return "", err
 	}
@@ -93,6 +93,7 @@ func Claims(c *gin.Context) (*CustomClaims, error) {
 	if err != nil {
 		return nil, err
 	}
+	//TODO: fix this
 	if claims, ok := token.Claims.(CustomClaims); ok {
 		return &claims, nil
 	}
