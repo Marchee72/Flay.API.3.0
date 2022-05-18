@@ -1,6 +1,8 @@
 package constants
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type UserType string
 
@@ -13,4 +15,23 @@ const (
 func (userType UserType) Equals(t interface{}) bool {
 	stringType := fmt.Sprintf("%v", t)
 	return stringType == string(userType)
+}
+
+func ToUserType(userType string) (*UserType, error) {
+	var parsedType UserType
+	var err error
+	switch userType {
+	case string(UserAdmin):
+		parsedType = UserAdmin
+	case string(UserRenter):
+		parsedType = UserRenter
+	case string(UserOwner):
+		parsedType = UserOwner
+	default:
+		err = fmt.Errorf("can not parse user type '%s'", userType)
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &parsedType, nil
 }

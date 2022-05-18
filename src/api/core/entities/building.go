@@ -6,9 +6,10 @@ import (
 )
 
 type Building struct {
-	ID      primitive.ObjectID `json:"ID" bson:"ID"`
-	Name    string             `json:"name" bson:"name"`
-	Address Address            `json:"address" bson:"address"`
+	ID           primitive.ObjectID `bson:"ID"`
+	Name         string             `bson:"name"`
+	Address      Address            `bson:"address"`
+	CommonSpaces []CommonSpace      `bson:"common_spaces"`
 }
 
 func (building Building) ToLw() lw.BuildingLw {

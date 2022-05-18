@@ -26,7 +26,7 @@ func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID
 		return nil, err
 	}
 	var response []entities.Booking
-	if err = cursor.All(ctx, response); err != nil {
+	if err = cursor.All(ctx, &response); err != nil {
 		return nil, err
 	}
 	return response, nil

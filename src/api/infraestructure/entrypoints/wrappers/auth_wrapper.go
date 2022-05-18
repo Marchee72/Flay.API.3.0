@@ -19,6 +19,7 @@ func AuthWrapper(handlerFunc HandlerFunc, c *gin.Context, allowedUsers []constan
 	}
 	if !authentication.IsAllowed(token, allowedUsers) {
 		c.JSON(http.StatusUnauthorized, "you are not allowed to perform this action.")
+		return
 	}
 	handlerFunc(c)
 }

@@ -76,11 +76,11 @@ func ExtractToken(c *gin.Context) (*jwt.Token, error) {
 	authHeader := c.GetHeader("Authorization")
 	tokenString := strings.Split(authHeader, BEARER_SCHEMA)
 	if len(tokenString) != 2 {
-		return nil, errors.New("token does not implements bearer schema.")
+		return nil, errors.New("token does not implements bearer schema")
 	}
 	token, err := VerifySigning(tokenString[1])
 	if !token.Valid {
-		return nil, errors.New("invalid authentication token.")
+		return nil, errors.New("invalid authentication token")
 	}
 	if err != nil {
 		return nil, err
@@ -88,14 +88,12 @@ func ExtractToken(c *gin.Context) (*jwt.Token, error) {
 	return token, nil
 }
 
-func Claims(c *gin.Context) (*CustomClaims, error) {
+func GetUserCredentials(c *gin.Context) (*entities.Credentials, error) {
 	token, err := ExtractToken(c)
 	if err != nil {
 		return nil, err
 	}
-	//TODO: fix this
-	if claims, ok := token.Claims.(CustomClaims); ok {
-		return &claims, nil
-	}
-	return nil, fmt.Errorf("an error ocurred trying to claim permissions.")
+	claims := token.Claims.(jwt.MapClaims)
+	s := GetCredentialsFromClaims(claims)
+	return &s, nil
 }

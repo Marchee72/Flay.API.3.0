@@ -32,7 +32,7 @@ func (handler *BookCommonSpace) handle(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, err.Error())
 		return
 	}
-	claims, err := authentication.Claims(c)
+	claims, err := authentication.GetUserCredentials(c)
 	if err != nil {
 		log.Printf("Error authenticating user: %s", err.Error())
 		c.JSON(http.StatusUnauthorized, err.Error())
