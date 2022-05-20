@@ -10,6 +10,7 @@ type Building struct {
 	Name         string             `bson:"name"`
 	Address      Address            `bson:"address"`
 	CommonSpaces []CommonSpace      `bson:"common_spaces"`
+	Admin        lw.UserLw          `bson:"admin"`
 }
 
 func (building Building) ToLw() lw.BuildingLw {
