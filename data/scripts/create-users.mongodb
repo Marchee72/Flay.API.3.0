@@ -24,12 +24,13 @@ db.users.insertMany([
   { 'username': 'inqui2', 'password': 'inqui2', 'name': 'inqui2', 'email': 'inqui2@flay.com', 'type': 'renter' },
 ]);
 
-var user1 = db.users.find({"username": "user1"}, {"_id": 1, "username": 1});
-var user2 = db.users.find({"username": "user2"}, {"_id": 1, "username": 1});
-var admin1 = db.users.find({"username": "admin1"}, {"_id": 1, "username": 1});
-var admin2 = db.users.find({"username": "admin2"}, {"_id": 1, "username": 1});
-var inqui1 = db.users.find({"username": "inqui1"}, {"_id": 1, "username": 1});
-var inqui2 = db.users.find({"username": "inqui1"}, {"_id": 1,"username": 1});
+var user1 = db.users.findOne({"username": "user1"});
+var user2 = db.users.findOne({"username": "user2"});
+var admin2 = db.users.findOne({"username": "admin2"});
+var inqui1 = db.users.findOne({"username": "inqui1"});
+var inqui2 = db.users.findOne({"username": "inqui1"});
+var admin1 = db.users.findOne({"username": "admin1"});
+
 
 db.buildings.insertMany([
   {"name": "Celenia 1", "address": "Mendoza 2656", "common_spaces": [{"name": "terraza", "type": "terrace"}, {"name": "salon", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
@@ -37,6 +38,6 @@ db.buildings.insertMany([
 ]);
 
 db.penalties.insertMany([
-  {"user": {"_id": inqui1._id, "name": inqui1.name}, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z")},
-  {"user": {"_id": inqui1._id, "name": inqui1.name}, "penalty_type": "BOOKING", "cause": "cagar en el palier", "amount": 0, "start_date": new ISODate("2022-05-15T06:31:15Z"), "end_date": new ISODate("2022--15T06:31:15Z")},
+  {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z")},
+  {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "BOOKING", "cause": "cagar en el palier", "amount": 0, "start_date": new ISODate("2022-05-15T06:31:15Z"), "end_date": new ISODate("2022-06-15T06:31:15Z")},
 ]);

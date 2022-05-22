@@ -7,9 +7,9 @@ import (
 )
 
 type Request struct {
-	User        common.UserLw       `json:"user"`
-	CommonSpace common.ComonSpaceLw `json:"common_space"`
-	Builging    common.BuildingLw   `json:"building"`
-	StartDate   time.Time           `json:"start_date"`
-	EndDate     time.Time           `json:"end_date"`
+	User        common.UserLw     `json:"user"`
+	CommonSpace string            `json:"common_space"`
+	Builging    common.BuildingLw `json:"building"`
+	StartDate   time.Time         `json:"start_date"`
+	EndDate     time.Time         `json:"end_date"`
 }
