@@ -32,10 +32,11 @@ func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID
 	return response, nil
 }
 
-func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, startDate time.Time, endDate time.Time) (bool, error) {
+func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, commonSpace string, startDate time.Time, endDate time.Time) (bool, error) {
 	var result entities.Booking
 	filter := bson.M{
-		"building.id": buildingID,
+		"building.id":  buildingID,
+		"common_space": commonSpace,
 		"$or": bson.A{
 			bson.A{"$and",
 				bson.M{"start_date": bson.M{"$gte": startDate}},

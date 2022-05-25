@@ -5,6 +5,6 @@ import (
 )
 
 type UserLw struct {
-	ID       primitive.ObjectID `bson:"id"`
-	Username string             `bson:"name"`
+	ID       primitive.ObjectID `json:"_id"`
+	Username string             `json:"name"`
 }

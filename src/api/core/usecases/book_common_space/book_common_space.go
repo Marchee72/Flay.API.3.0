@@ -29,7 +29,7 @@ func (useCase *Implementation) Execute(ctx context.Context, request book_common_
 		response.SetPenalty(*penalty)
 		return &response, nil
 	}
-	isAbailable, err := useCase.BookingRepository.IsAbailable(ctx, request.CommonSpace.ID, request.StartDate, request.EndDate)
+	isAbailable, err := useCase.BookingRepository.IsAbailable(ctx, request.Builging.ID, request.CommonSpace, request.StartDate, request.EndDate)
 	if err != nil {
 		return nil, err
 	}

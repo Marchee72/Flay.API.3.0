@@ -37,7 +37,15 @@ db.buildings.insertMany([
   {"name": "Celenia 2", "address": "Cordoba 743", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin2._id, "name": admin2.name}}
 ]);
 
+var celenia1 = db.buildings.findOne({"name": "Celenia 1"});
+var celenia2 = db.buildings.findOne({"name": "Celenia 2"});
+
+
 db.penalties.insertMany([
   {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z")},
   {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "BOOKING", "cause": "cagar en el palier", "amount": 0, "start_date": new ISODate("2022-05-15T06:31:15Z"), "end_date": new ISODate("2022-06-15T06:31:15Z")},
 ]);
+
+db.bookings.insertMany([
+  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "start_date": new ISODate("2022-06-01T06:31:15Z"), "end_date": new ISODate("2022-06-01T12:31:15Z")}
+])

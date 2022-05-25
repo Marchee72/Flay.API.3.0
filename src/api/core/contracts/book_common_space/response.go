@@ -13,7 +13,7 @@ type Response struct {
 	IsAbailable        bool    `json:"is_abailable"`
 }
 
-func (resp Response) SetPenalty(p entities.Penalty) {
+func (resp *Response) SetPenalty(p entities.Penalty) {
 	resp.HasActivePenalties = true
 	resp.Penalty = penalty{
 		PenaltyType: p.PenaltyType,
@@ -24,7 +24,7 @@ func (resp Response) SetPenalty(p entities.Penalty) {
 
 func (resp Response) SetBooking(b entities.Booking) {
 	resp.Booking = booking{
-		CommonSpaceName: b.CommonSpace.Name,
+		CommonSpaceName: b.CommonSpace,
 		StartDate:       b.StartDate,
 		EndDate:         b.EndDate,
 	}

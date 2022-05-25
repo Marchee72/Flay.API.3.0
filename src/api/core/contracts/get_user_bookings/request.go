@@ -12,17 +12,17 @@ type Response struct {
 }
 
 type booking struct {
-	User        common.UserLw       `json:"user"`
-	CommonSpace common.ComonSpaceLw `json:"common_space"`
-	Building    common.BuildingLw   `json:"building"`
-	StartDate   time.Time           `json:"start_date"`
-	EndDate     time.Time           `json:"end_date"`
+	User        common.UserLw     `json:"user"`
+	CommonSpace string            `json:"common_space"`
+	Building    common.BuildingLw `json:"building"`
+	StartDate   time.Time         `json:"start_date"`
+	EndDate     time.Time         `json:"end_date"`
 }
 
 func (resp *Response) AddBooking(b entities.Booking) {
 	newBooking := booking{
 		User:        common.NewUserLw(b.User),
-		CommonSpace: common.NewCommonSpaceLw(b.CommonSpace),
+		CommonSpace: b.CommonSpace,
 		Building:    common.NewBuildingLw(b.Building),
 		StartDate:   b.StartDate,
 		EndDate:     b.EndDate,
