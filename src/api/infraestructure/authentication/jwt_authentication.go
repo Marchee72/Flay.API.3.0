@@ -1,7 +1,6 @@
 package authentication
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -10,6 +9,7 @@ import (
 
 	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/entities"
+	"flay-api-v3.0/src/api/core/errors"
 	"github.com/gin-gonic/gin"
 	jwt "github.com/golang-jwt/jwt"
 )
@@ -55,7 +55,7 @@ func VerifySigning(receivedToken string) (*jwt.Token, error) {
 }
 
 func IsAllowed(token *jwt.Token, allowedUsers []constants.UserType) bool {
-	if allowedUsers == nil || len(allowedUsers) == 0 {
+	if len(allowedUsers) == 0 {
 		return true
 	}
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
@@ -76,11 +76,11 @@ func ExtractToken(c *gin.Context) (*jwt.Token, error) {
 	authHeader := c.GetHeader("Authorization")
 	tokenString := strings.Split(authHeader, BEARER_SCHEMA)
 	if len(tokenString) != 2 {
-		return nil, errors.New("token does not implements bearer schema")
+		return nil, errors.NewUnauthorizedError("token does not implements bearer schema")
 	}
 	token, err := VerifySigning(tokenString[1])
 	if !token.Valid {
-		return nil, errors.New("invalid authentication token")
+		return nil, errors.NewBadRequestError("invalid authentication token")
 	}
 	if err != nil {
 		return nil, err
