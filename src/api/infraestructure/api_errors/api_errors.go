@@ -48,7 +48,7 @@ func NewBadRequestError(messages ...string) *APIError {
 	return newAPIError(http.StatusBadRequest, message, "bad_request")
 }
 
-func NewUnauthorizedRequest(messages ...string) *APIError {
+func NewUnauthorizedError(messages ...string) *APIError {
 	message := InvalidMissingCallerIDMessage
 
 	if len(messages) > 0 {
