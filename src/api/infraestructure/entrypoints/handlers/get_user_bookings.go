@@ -23,6 +23,7 @@ func (handler *GetUserBookings) Handle(c *gin.Context) {
 func (handler *GetUserBookings) handle(c *gin.Context) {
 	ctx := context.Background()
 	claims, err := authentication.GetUserCredentials(c)
+	log.Printf(claims.Username)
 	if err != nil {
 		log.Printf("Error authenticating user: %s", err.Error())
 		c.JSON(http.StatusUnauthorized, err.Error())

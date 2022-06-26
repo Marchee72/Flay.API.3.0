@@ -17,7 +17,10 @@ const (
 
 func Start() {
 	router = gin.Default()
-	router.Use(cors.Default())
+	var corsConfig = cors.DefaultConfig()
+	corsConfig.AddAllowHeaders("Authorization")
+	corsConfig.AllowAllOrigins = true
+	router.Use(cors.New(corsConfig))
 	handlers := dependencies.Start()
 	configureMappings(router, handlers)
 	_ = router.Run(port)

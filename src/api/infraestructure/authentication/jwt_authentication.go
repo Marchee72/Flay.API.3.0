@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"strings"
-	"time"
 
 	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/entities"
@@ -25,9 +24,9 @@ func CreateToken(user entities.Credentials) (string, error) {
 		UserType:   user.UserType,
 		Username:   user.Username,
 		Authorized: true,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Minute * 15).Unix(),
-		},
+		// StandardClaims: jwt.StandardClaims{
+		// 	ExpiresAt: time.Now().Add(time.Minute * 150).Unix(),
+		// },
 	}
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token, err := at.SignedString([]byte(os.Getenv("ACCESS_SECRET")))

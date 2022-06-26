@@ -6,7 +6,7 @@ import (
 )
 
 type BuildingLw struct {
-	ID   primitive.ObjectID `bson:"ID"`
+	ID   primitive.ObjectID `bson:"id"`
 	Name string             `bson:"name"`
 }
 
