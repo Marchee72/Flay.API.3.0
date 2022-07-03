@@ -78,8 +78,8 @@ func ExtractToken(c *gin.Context) (*jwt.Token, error) {
 		return nil, errors.NewUnauthorizedError("token does not implements bearer schema")
 	}
 	token, err := VerifySigning(tokenString[1])
-	if !token.Valid {
-		return nil, errors.NewBadRequestError("invalid authentication token")
+	if err != nil || !token.Valid {
+		return nil, errors.NewUnauthorizedError("invalid authentication token")
 	}
 	if err != nil {
 		return nil, err

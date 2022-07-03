@@ -30,6 +30,6 @@ func newInternalServerError(err error) *api_errors.APIError {
 
 func newUnauthorizedError(err error) *api_errors.APIError {
 	apiError := api_errors.NewUnauthorizedError(err.Error())
-	apiError.Cause = err.(InternalServerError).Cause()
+	apiError.Cause = err.(UnauthorizedError).Cause()
 	return apiError
 }

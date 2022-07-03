@@ -20,6 +20,7 @@ func Start() {
 	var corsConfig = cors.DefaultConfig()
 	corsConfig.AddAllowHeaders("Authorization")
 	corsConfig.AllowAllOrigins = true
+	corsConfig.AllowMethods = append(corsConfig.AllowMethods, "GET", "POST", "PUT", "DELETE")
 	router.Use(cors.New(corsConfig))
 	handlers := dependencies.Start()
 	configureMappings(router, handlers)
