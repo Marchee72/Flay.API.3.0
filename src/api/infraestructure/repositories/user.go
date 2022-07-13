@@ -7,6 +7,7 @@ import (
 	"flay-api-v3.0/src/api/core/entities"
 	"flay-api-v3.0/src/api/core/entities/lw"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -29,6 +30,15 @@ func (repository *UserRepository) GetUserCredentials(ctx context.Context, user l
 	var result entities.Credentials
 	err := repository.Users.FindOne(ctx, bson.M{"username": user.Username, "password": user.Password}, opt).Decode(&result)
 	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+func (repository *UserRepository) GetUserById(ctx context.Context, userID primitive.ObjectID) (*entities.User, error) {
+	var result entities.User
+	err := repository.Users.FindOne(ctx, bson.M{"_id": userID}).Decode(&result)
+	if err != mongo.ErrNoDocuments {
 		return nil, err
 	}
 	return &result, nil

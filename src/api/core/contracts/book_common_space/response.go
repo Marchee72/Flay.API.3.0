@@ -3,6 +3,7 @@ package book_common_space
 import (
 	"time"
 
+	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/entities"
 )
 
@@ -25,15 +26,15 @@ func (resp *Response) SetPenalty(p entities.Penalty) {
 func (resp Response) SetBooking(b entities.Booking) {
 	resp.Booking = booking{
 		CommonSpaceName: b.CommonSpace,
-		StartDate:       b.StartDate,
-		EndDate:         b.EndDate,
+		Date:            b.Date,
+		Shift:           b.Shift,
 	}
 }
 
 type booking struct {
-	CommonSpaceName string    `json:"common_space_name"`
-	StartDate       time.Time `json:"start_date"`
-	EndDate         time.Time `json:"end_date"`
+	CommonSpaceName string          `json:"common_space_name"`
+	Date            time.Time       `json:"date"`
+	Shift           constants.Shift `json:"shift"`
 }
 
 type penalty struct {

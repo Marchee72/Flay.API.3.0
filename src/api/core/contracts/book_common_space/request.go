@@ -1,15 +1,11 @@
 package book_common_space
 
 import (
-	"time"
-
-	"flay-api-v3.0/src/api/core/contracts/common"
+	"flay-api-v3.0/src/api/core/constants"
 )
 
 type Request struct {
-	User        common.UserLw     `json:"user"`
-	CommonSpace string            `json:"common_space"`
-	Builging    common.BuildingLw `json:"building"`
-	StartDate   time.Time         `json:"start_date"`
-	EndDate     time.Time         `json:"end_date"`
+	CommonSpace string          `json:"common_space"`
+	Date        string          `json:"date"`
+	Shift       constants.Shift `json:"shift"`
 }

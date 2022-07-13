@@ -45,6 +45,7 @@ func Start() *HandlerContainer {
 	bookCommonSpaceUseCase := &book_common_space.Implementation{
 		PenaltyRepository: &penaltyRepository,
 		BookingRepository: &bookingRepository,
+		UserRepository:    &userRepository,
 	}
 	getUserBookingsUseCase := get_user_bookings.Implementation{
 		BookingRepository: &bookingRepository,

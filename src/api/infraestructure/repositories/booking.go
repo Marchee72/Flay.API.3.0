@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/entities"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -32,29 +33,13 @@ func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID
 	return response, nil
 }
 
-func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, commonSpace string, startDate time.Time, endDate time.Time) (bool, error) {
+func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, commonSpace string, date time.Time, shift constants.Shift) (bool, error) {
 	var result entities.Booking
 	filter := bson.M{
 		"building.id":  buildingID,
 		"common_space": commonSpace,
-		"$or": bson.A{
-			bson.A{"$and",
-				bson.M{"start_date": bson.M{"$gte": startDate}},
-				bson.M{"start_date": bson.M{"$lte": endDate}},
-			},
-			bson.A{"$and",
-				bson.M{"end_date": bson.M{"$gte": startDate}},
-				bson.M{"end_date": bson.M{"$lte": endDate}},
-			},
-			bson.A{"$and",
-				bson.M{"start_date": bson.M{"$lte": startDate}},
-				bson.M{"end_date": bson.M{"$gte": startDate}},
-			},
-			bson.A{"$and",
-				bson.M{"start_date": bson.M{"$lte": endDate}},
-				bson.M{"end_date": bson.M{"$gte": endDate}},
-			},
-		},
+		"date":         date,
+		"shift":        shift,
 	}
 	err := repository.Bookings.FindOne(ctx, filter).Decode(&result)
 	if err != nil {

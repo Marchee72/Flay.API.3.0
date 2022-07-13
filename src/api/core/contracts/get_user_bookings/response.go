@@ -3,8 +3,10 @@ package get_user_bookings
 import (
 	"time"
 
+	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/contracts/common"
 	"flay-api-v3.0/src/api/core/entities"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Response struct {
@@ -12,20 +14,22 @@ type Response struct {
 }
 
 type booking struct {
-	User        common.UserLw     `json:"user"`
-	CommonSpace string            `json:"common_space"`
-	Building    common.BuildingLw `json:"building"`
-	StartDate   time.Time         `json:"start_date"`
-	EndDate     time.Time         `json:"end_date"`
+	ID          primitive.ObjectID `json:"id"`
+	User        common.UserLw      `json:"user"`
+	CommonSpace string             `json:"common_space"`
+	Building    common.BuildingLw  `json:"building"`
+	Date        time.Time          `json:"date"`
+	Shift       constants.Shift    `json:"shift"`
 }
 
 func (resp *Response) AddBooking(b entities.Booking) {
 	newBooking := booking{
+		ID:          b.Building.ID,
 		User:        common.NewUserLw(b.User),
 		CommonSpace: b.CommonSpace,
 		Building:    common.NewBuildingLw(b.Building),
-		StartDate:   b.StartDate,
-		EndDate:     b.EndDate,
+		Date:        b.Date,
+		Shift:       b.Shift,
 	}
 	resp.Bookings = append(resp.Bookings, newBooking)
 }
