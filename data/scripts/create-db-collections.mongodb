@@ -6,11 +6,12 @@ const database = 'Flay';
 // Create a new database.
 use(database);
 
-// Create a new collection.
-db.createCollection("users");
-db.createCollection("common_spaces");
-db.createCollection("penalties");
-db.createCollection("bookings");
-db.createCollection("issues");
-db.createCollection("buildings");
+// // Create a new collection.
+// db.createCollection("users");
+// db.createCollection("common_spaces");
+// db.createCollection("penalties");
+// db.createCollection("bookings");
+// db.createCollection("issues");
+// db.createCollection("buildings");
+
 

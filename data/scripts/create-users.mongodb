@@ -4,32 +4,23 @@
 // Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
 // Select the database to use.
-use('Flay');
+use("Flay");
 
 // The drop() command destroys all data from a collection.
 // Make sure you run it against the correct database and collection.
 db.users.drop();
 db.buildings.drop();
 db.penalties.drop();
+db.bookings.drop();
 
-// Insert a few documents into the sales collection.
+// First create admin users
 db.users.insertMany([
-  { 'username': 'user1',  'password': 'user1',  'name': 'user1',  'email': 'user1@flay.com' , 'type': 'renter' },
-  { 'username': 'user2',  'password': 'user2',  'name': 'user2' , 'email': 'user2@flay.com' , 'type': 'renter' } ,
-  { 'username': 'owner1', 'password': 'owner1', 'name': 'owner1', 'email': 'owner1@flay.com', 'type': 'owner' },
-  { 'username': 'owner2', 'password': 'owner2', 'name': 'owner2', 'email': 'owner2@flay.com', 'type': 'owner' },
-  { 'username': 'admin1', 'password': 'admin1', 'name': 'admin1', 'email': 'admin1@flay.com', 'type': 'admin' },
-  { 'username': 'admin2', 'password': 'admin2', 'name': 'admin2', 'email': 'admin2@flay.com', 'type': 'admin' },
-  { 'username': 'inqui1', 'password': 'inqui1', 'name': 'inqui1', 'email': 'inqui1@flay.com', 'type': 'renter' },
-  { 'username': 'inqui2', 'password': 'inqui2', 'name': 'inqui2', 'email': 'inqui2@flay.com', 'type': 'renter' },
+  { "username": "admin1", "password": "admin1", "name": "admin1", "email": "admin1@flay.com", "type": "admin" },
+  { "username": "admin2", "password": "admin2", "name": "admin2", "email": "admin2@flay.com", "type": "admin" },
 ]);
 
-var user1 = db.users.findOne({"username": "user1"});
-var user2 = db.users.findOne({"username": "user2"});
-var admin2 = db.users.findOne({"username": "admin2"});
-var inqui1 = db.users.findOne({"username": "inqui1"});
-var inqui2 = db.users.findOne({"username": "inqui1"});
 var admin1 = db.users.findOne({"username": "admin1"});
+var admin2 = db.users.findOne({"username": "admin2"});
 
 
 db.buildings.insertMany([
@@ -40,6 +31,19 @@ db.buildings.insertMany([
 var celenia1 = db.buildings.findOne({"name": "Celenia 1"});
 var celenia2 = db.buildings.findOne({"name": "Celenia 2"});
 
+db.users.insertMany([
+  { "username": "user1",  "password": "user1",  "name": "user1",  "email": "user1@flay.com" , "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }  },
+  { "username": "user2",  "password": "user2",  "name": "user2" , "email": "user2@flay.com" , "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }  } ,
+  { "username": "owner1", "password": "owner1", "name": "owner1", "email": "owner1@flay.com", "type": "owner" , "building": {"_id": celenia1._id, "name": celenia1.name }  },
+  { "username": "owner2", "password": "owner2", "name": "owner2", "email": "owner2@flay.com", "type": "owner" , "building": {"_id": celenia1._id, "name": celenia1.name }  },
+  { "username": "inqui1", "password": "inqui1", "name": "inqui1", "email": "inqui1@flay.com", "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }  },
+  { "username": "inqui2", "password": "inqui2", "name": "inqui2", "email": "inqui2@flay.com", "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }  },
+]);
+
+var user1 = db.users.findOne({"username": "user1"});
+var user2 = db.users.findOne({"username": "user2"});
+var inqui1 = db.users.findOne({"username": "inqui1"});
+var inqui2 = db.users.findOne({"username": "inqui1"});
 
 db.penalties.insertMany([
   {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z")},
@@ -47,5 +51,5 @@ db.penalties.insertMany([
 ]);
 
 db.bookings.insertMany([
-  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "start_date": new ISODate("2022-06-01T06:31:15Z"), "end_date": new ISODate("2022-06-01T12:31:15Z")}
+  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-06-01T06:31:15Z"), "shift": "TARDE"}
 ])
