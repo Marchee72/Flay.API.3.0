@@ -53,6 +53,7 @@ func Start() *HandlerContainer {
 	}
 	getUserBuildingUseCase := get_user_building.Implementation{
 		BuildingRepository: &buildingRepository,
+		UserRepository:     &userRepository,
 	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
