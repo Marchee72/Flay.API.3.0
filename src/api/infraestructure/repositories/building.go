@@ -13,10 +13,23 @@ type BuildingRepository struct {
 	Buildings *mongo.Collection
 }
 
-func (repository *BuildingRepository) GetRepository(ctx context.Context, buildingID primitive.ObjectID) (*entities.Building, error) {
+func (repository *BuildingRepository) GetBuildingById(ctx context.Context, buildingID primitive.ObjectID) (*entities.Building, error) {
 	var result entities.Building
 	if err := repository.Buildings.FindOne(ctx, bson.M{"_id": buildingID}).Decode(&result); err != nil && err != mongo.ErrNoDocuments {
 		return nil, err
 	}
 	return &result, nil
+}
+
+func (repository *BuildingRepository) GetBuildings(ctx context.Context, ids []primitive.ObjectID) ([]entities.Building, error) {
+	var result []entities.Building
+	cursor, err := repository.Buildings.Find(ctx, bson.M{"_id": bson.M{"$in": ids}})
+	if err != nil {
+		return nil, err
+	}
+	var response []entities.Booking
+	if err = cursor.All(ctx, &response); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

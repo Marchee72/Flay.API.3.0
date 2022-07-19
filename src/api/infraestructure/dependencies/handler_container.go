@@ -6,4 +6,5 @@ type HandlerContainer struct {
 	Login           entrypoints.Handler
 	BookCommonSpace entrypoints.Handler
 	GetUserBookings entrypoints.Handler
+	GetUserBuilding entrypoints.Handler
 }

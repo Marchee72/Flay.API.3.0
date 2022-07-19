@@ -6,6 +6,7 @@ import (
 	database "flay-api-v3.0/src/api/config"
 	"flay-api-v3.0/src/api/core/usecases/book_common_space"
 	"flay-api-v3.0/src/api/core/usecases/get_user_bookings"
+	"flay-api-v3.0/src/api/core/usecases/get_user_building"
 	login "flay-api-v3.0/src/api/core/usecases/login"
 
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
@@ -34,9 +35,9 @@ func Start() *HandlerContainer {
 	penaltyRepository := store.PenaltyRepository{
 		Penalties: dbContainer.Penalties,
 	}
-	// buildingRepository := store.BuildingRepository{
-	// 	Buildings: dbContainer.Building,
-	// }
+	buildingRepository := store.BuildingRepository{
+		Buildings: dbContainer.Building,
+	}
 
 	//Usecase injection
 	loginUseCase := &login.Implementation{
@@ -50,6 +51,9 @@ func Start() *HandlerContainer {
 	getUserBookingsUseCase := get_user_bookings.Implementation{
 		BookingRepository: &bookingRepository,
 	}
+	getUserBuildingUseCase := get_user_building.Implementation{
+		BuildingRepository: &buildingRepository,
+	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
 
@@ -61,6 +65,10 @@ func Start() *HandlerContainer {
 	}
 	apiHandlers.GetUserBookings = &handlers.GetUserBookings{
 		GetUserBookingsUseCase: getUserBookingsUseCase,
+	}
+
+	apiHandlers.GetUserBuilding = &handlers.GetUserBuilding{
+		GetUserBuildingUseCase: getUserBuildingUseCase,
 	}
 
 	return &apiHandlers

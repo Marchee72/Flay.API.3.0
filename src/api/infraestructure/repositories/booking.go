@@ -26,11 +26,11 @@ func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID
 	if err != nil {
 		return nil, err
 	}
-	var response []entities.Booking
-	if err = cursor.All(ctx, &response); err != nil {
+	var result []entities.Booking
+	if err = cursor.All(ctx, &result); err != nil {
 		return nil, err
 	}
-	return response, nil
+	return result, nil
 }
 
 func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, commonSpace string, date time.Time, shift constants.Shift) (bool, error) {
