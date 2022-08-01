@@ -5,19 +5,18 @@ import (
 
 	"flay-api-v3.0/src/api/core/contracts/get_user_bookings"
 	"flay-api-v3.0/src/api/core/providers"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type UseCase interface {
-	Execute(ctx context.Context, userID primitive.ObjectID) (*get_user_bookings.Response, error)
+	Execute(ctx context.Context, request get_user_bookings.Request) (*get_user_bookings.Response, error)
 }
 
 type Implementation struct {
 	BookingRepository providers.BookingRepository
 }
 
-func (usecase Implementation) Execute(ctx context.Context, userID primitive.ObjectID) (*get_user_bookings.Response, error) {
-	bookings, err := usecase.BookingRepository.GetUserBookings(ctx, userID)
+func (usecase Implementation) Execute(ctx context.Context, request get_user_bookings.Request) (*get_user_bookings.Response, error) {
+	bookings, err := usecase.BookingRepository.GetUserBookings(ctx, request.UserID)
 	if err != nil {
 		return nil, err
 	}

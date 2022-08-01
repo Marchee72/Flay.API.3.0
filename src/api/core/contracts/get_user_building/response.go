@@ -6,7 +6,7 @@ import (
 )
 
 type Response struct {
-	ID           primitive.ObjectID `json:"ID"`
+	ID           primitive.ObjectID `json:"id"`
 	Name         string             `json:"name"`
 	Address      address            `json:"address"`
 	CommonSpaces []commonSpace      `json:"common_spaces"`

@@ -5,6 +5,7 @@ import (
 
 	database "flay-api-v3.0/src/api/config"
 	"flay-api-v3.0/src/api/core/usecases/book_common_space"
+	"flay-api-v3.0/src/api/core/usecases/get_building_bookings"
 	"flay-api-v3.0/src/api/core/usecases/get_user_bookings"
 	"flay-api-v3.0/src/api/core/usecases/get_user_building"
 	login "flay-api-v3.0/src/api/core/usecases/login"
@@ -26,6 +27,7 @@ func Start() *HandlerContainer {
 	userRepository := store.UserRepository{
 		Users: dbContainer.Users,
 	}
+
 	bookingRepository := store.BookingRepository{
 		Bookings: dbContainer.Bookings,
 	}
@@ -35,6 +37,7 @@ func Start() *HandlerContainer {
 	penaltyRepository := store.PenaltyRepository{
 		Penalties: dbContainer.Penalties,
 	}
+
 	buildingRepository := store.BuildingRepository{
 		Buildings: dbContainer.Building,
 	}
@@ -43,17 +46,24 @@ func Start() *HandlerContainer {
 	loginUseCase := &login.Implementation{
 		UserRepository: &userRepository,
 	}
+
 	bookCommonSpaceUseCase := &book_common_space.Implementation{
 		PenaltyRepository: &penaltyRepository,
 		BookingRepository: &bookingRepository,
 		UserRepository:    &userRepository,
 	}
+
 	getUserBookingsUseCase := get_user_bookings.Implementation{
 		BookingRepository: &bookingRepository,
 	}
+
 	getUserBuildingUseCase := get_user_building.Implementation{
 		BuildingRepository: &buildingRepository,
 		UserRepository:     &userRepository,
+	}
+
+	getBuildingBookingUseCase := get_building_bookings.Implementation{
+		BookingRepository: &bookingRepository,
 	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
@@ -61,15 +71,21 @@ func Start() *HandlerContainer {
 	apiHandlers.Login = &handlers.Login{
 		LoginUseCase: loginUseCase,
 	}
+
 	apiHandlers.BookCommonSpace = &handlers.BookCommonSpace{
 		BookCommonSpaceUseCase: bookCommonSpaceUseCase,
 	}
+
 	apiHandlers.GetUserBookings = &handlers.GetUserBookings{
 		GetUserBookingsUseCase: getUserBookingsUseCase,
 	}
 
 	apiHandlers.GetUserBuilding = &handlers.GetUserBuilding{
 		GetUserBuildingUseCase: getUserBuildingUseCase,
+	}
+
+	apiHandlers.GetBuildingBookings = &handlers.GetBuildingBookings{
+		GetUserBookingsUseCase: getBuildingBookingUseCase,
 	}
 
 	return &apiHandlers

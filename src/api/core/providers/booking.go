@@ -12,5 +12,6 @@ import (
 type BookingRepository interface {
 	Save(ctx context.Context, booking entities.Booking) error
 	GetUserBookings(ctx context.Context, userID primitive.ObjectID) ([]entities.Booking, error)
+	GetBuildingBookings(ctx context.Context, buildingID primitive.ObjectID, from time.Time) ([]entities.Booking, error)
 	IsAbailable(ctx context.Context, buildingID primitive.ObjectID, commonSpace string, date time.Time, shift constants.Shift) (bool, error)
 }

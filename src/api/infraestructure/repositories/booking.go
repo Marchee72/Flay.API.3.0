@@ -33,6 +33,19 @@ func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID
 	return result, nil
 }
 
+func (repository *BookingRepository) GetBuildingBookings(ctx context.Context, buildingID primitive.ObjectID, from time.Time) ([]entities.Booking, error) {
+	fromBson := primitive.NewDateTimeFromTime(from)
+	cursor, err := repository.Bookings.Find(ctx, bson.M{"building._id": buildingID, "date": bson.M{"$gte": fromBson}})
+	if err != nil {
+		return nil, err
+	}
+	var result []entities.Booking
+	if err = cursor.All(ctx, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 func (repository *BookingRepository) IsAbailable(ctx context.Context, buildingID primitive.ObjectID, commonSpace string, date time.Time, shift constants.Shift) (bool, error) {
 	var result entities.Booking
 	filter := bson.M{
