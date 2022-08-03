@@ -6,7 +6,7 @@ import (
 )
 
 type Building struct {
-	ID           primitive.ObjectID `bson:"ID"`
+	ID           primitive.ObjectID `bson:"_id"`
 	Name         string             `bson:"name"`
 	Address      Address            `bson:"address"`
 	CommonSpaces []CommonSpace      `bson:"common_spaces"`

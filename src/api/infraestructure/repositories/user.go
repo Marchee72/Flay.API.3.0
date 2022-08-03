@@ -38,7 +38,7 @@ func (repository *UserRepository) GetUserCredentials(ctx context.Context, user l
 func (repository *UserRepository) GetUserById(ctx context.Context, userID primitive.ObjectID) (*entities.User, error) {
 	var result entities.User
 	err := repository.Users.FindOne(ctx, bson.M{"_id": userID}).Decode(&result)
-	if err != mongo.ErrNoDocuments {
+	if err != nil {
 		return nil, err
 	}
 	return &result, nil
