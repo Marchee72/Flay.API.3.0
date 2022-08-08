@@ -8,7 +8,7 @@ import (
 type Building struct {
 	ID           primitive.ObjectID `bson:"_id"`
 	Name         string             `bson:"name"`
-	Address      Address            `bson:"address"`
+	Address      string             `bson:"address"`
 	CommonSpaces []CommonSpace      `bson:"common_spaces"`
 	Admin        lw.UserLw          `bson:"admin"`
 }

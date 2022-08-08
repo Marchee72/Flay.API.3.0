@@ -39,7 +39,7 @@ func Start() *HandlerContainer {
 	}
 
 	buildingRepository := store.BuildingRepository{
-		Buildings: dbContainer.Building,
+		Buildings: dbContainer.Buildings,
 	}
 
 	//Usecase injection

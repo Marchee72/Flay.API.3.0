@@ -8,7 +8,7 @@ import (
 type Response struct {
 	ID           primitive.ObjectID `json:"id"`
 	Name         string             `json:"name"`
-	Address      address            `json:"address"`
+	Address      string             `json:"address"`
 	CommonSpaces []commonSpace      `json:"common_spaces"`
 }
 
@@ -30,11 +30,11 @@ func (resp *Response) SetCommonSpaces(commonSpaces []entities.CommonSpace) {
 	}
 }
 
-func (resp *Response) SetAddres(addres entities.Address) {
-	resp.Address = address{
-		Street:    addres.Street,
-		Number:    addres.Number,
-		Apartment: addres.Apartment,
-		Floor:     addres.Floor,
-	}
-}
+// func (resp *Response) SetAddres(addres entities.Address) {
+// 	resp.Address = address{
+// 		Street:    addres.Street,
+// 		Number:    addres.Number,
+// 		Apartment: addres.Apartment,
+// 		Floor:     addres.Floor,
+// 	}
+// }

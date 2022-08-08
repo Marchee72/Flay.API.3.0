@@ -30,7 +30,6 @@ func (useCase Implementation) Execute(ctx context.Context, userID primitive.Obje
 		ID:   building.ID,
 		Name: building.Name,
 	}
-	response.SetAddres(building.Address)
 	response.SetCommonSpaces(building.CommonSpaces)
 	return &response, nil
 }
