@@ -27,8 +27,9 @@ func (useCase Implementation) Execute(ctx context.Context, userID primitive.Obje
 		return nil, err
 	}
 	response := get_user_building.Response{
-		ID:   building.ID,
-		Name: building.Name,
+		ID:      building.ID,
+		Name:    building.Name,
+		Address: building.Address,
 	}
 	response.SetCommonSpaces(building.CommonSpaces)
 	return &response, nil

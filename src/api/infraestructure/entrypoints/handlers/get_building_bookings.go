@@ -36,6 +36,10 @@ func (handler *GetBuildingBookings) handle(c *gin.Context) *api_errors.APIError 
 		log.Printf("Error binding request: %s", err.Error())
 		return errors.GetCommonsApiError(err)
 	}
+	if err := c.BindQuery(&request); err != nil {
+		log.Printf("Error binding request: %s", err.Error())
+		return errors.GetCommonsApiError(err)
+	}
 	response, err := handler.GetUserBookingsUseCase.Execute(ctx, request)
 	if err != nil {
 		return errors.GetCommonsApiError(err)

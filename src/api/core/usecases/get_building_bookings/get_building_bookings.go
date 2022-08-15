@@ -19,7 +19,7 @@ type Implementation struct {
 
 func (usecase Implementation) Execute(ctx context.Context, request get_building_bookings.Request) (*get_building_bookings.Response, error) {
 	from := time.Now().Add(time.Duration(constants.BookingMaxDaysAgo))
-	bookings, err := usecase.BookingRepository.GetBuildingBookings(ctx, request.BuildingID, from)
+	bookings, err := usecase.BookingRepository.GetBuildingBookings(ctx, request.ID(), &from, request.Date)
 	if err != nil {
 		return nil, err
 	}
