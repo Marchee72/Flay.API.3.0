@@ -35,12 +35,13 @@ func (repository *BookingRepository) GetUserBookings(ctx context.Context, userID
 
 func (repository *BookingRepository) GetBuildingBookings(ctx context.Context, buildingID primitive.ObjectID, from *time.Time, date *time.Time) ([]entities.Booking, error) {
 	var filter bson.M
+	//TODO: Fix $gte date query
 	if date != nil {
-		dateBson := primitive.NewDateTimeFromTime(*date)
-		filter = bson.M{"building._id": buildingID, "date": dateBson}
+		//dateBson := primitive.NewDateTimeFromTime(*date)
+		filter = bson.M{"building._id": buildingID /*, "date": dateBson*/}
 	} else {
-		fromBson := primitive.NewDateTimeFromTime(*from)
-		filter = bson.M{"building._id": buildingID, "date": bson.M{"$gte": fromBson}}
+		//fromBson := primitive.NewDateTimeFromTime(*from)
+		filter = bson.M{"building._id": buildingID /*, "date": bson.M{"$gte": fromBson}*/}
 	}
 	//fromBson := primitive.NewDateTimeFromTime(from)
 	cursor, err := repository.Bookings.Find(ctx, filter)

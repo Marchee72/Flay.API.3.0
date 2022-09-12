@@ -7,11 +7,11 @@ import (
 )
 
 type Request struct {
-	BuildingID string     `uri:"building_id" binding:"required"`
-	Date       *time.Time `form:"date"`
+	BuildingRawID string     `uri:"building_id" binding:"required"`
+	Date          *time.Time `form:"date"`
 }
 
-func (request *Request) ID() primitive.ObjectID {
-	id, _ := primitive.ObjectIDFromHex(request.BuildingID)
+func (request *Request) BuildingID() primitive.ObjectID {
+	id, _ := primitive.ObjectIDFromHex(request.BuildingRawID)
 	return id
 }

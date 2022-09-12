@@ -43,7 +43,7 @@ db.users.insertMany([
 var user1 = db.users.findOne({"username": "user1"});
 var user2 = db.users.findOne({"username": "user2"});
 var inqui1 = db.users.findOne({"username": "inqui1"});
-var inqui2 = db.users.findOne({"username": "inqui1"});
+var inqui2 = db.users.findOne({"username": "inqui2"});
 
 db.penalties.insertMany([
   {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z")},
@@ -51,5 +51,8 @@ db.penalties.insertMany([
 ]);
 
 db.bookings.insertMany([
-  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-06-01T06:31:15Z"), "shift": "TARDE"}
+  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-06-01T06:31:15Z"), "shift": "TARDE"},
+  {"user": {"_id": user2._id, "name": user2.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-07-09T06:32:15Z"), "shift": "NOCHE"},
+  {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-08-01T20:10:15Z"), "shift": "TARDE"},
+
 ])

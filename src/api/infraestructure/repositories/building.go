@@ -22,13 +22,12 @@ func (repository *BuildingRepository) GetBuildingById(ctx context.Context, build
 }
 
 func (repository *BuildingRepository) GetBuildings(ctx context.Context, ids []primitive.ObjectID) ([]entities.Building, error) {
-	var result []entities.Building
 	cursor, err := repository.Buildings.Find(ctx, bson.M{"_id": bson.M{"$in": ids}})
 	if err != nil {
 		return nil, err
 	}
-	var response []entities.Booking
-	if err = cursor.All(ctx, &response); err != nil {
+	var result []entities.Building
+	if err = cursor.All(ctx, &result); err != nil {
 		return nil, err
 	}
 	return result, nil

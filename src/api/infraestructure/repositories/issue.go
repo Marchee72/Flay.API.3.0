@@ -40,9 +40,9 @@ func (repository *IssueRepository) getIssues(ctx context.Context, filter bson.M)
 	if err != nil {
 		return nil, err
 	}
-	var issues []entities.Issue
-	if err = cursor.All(ctx, &issues); err != mongo.ErrNoDocuments {
+	var response []entities.Issue
+	if err = cursor.All(ctx, &response); err != nil {
 		return nil, err
 	}
-	return issues, nil
+	return response, nil
 }
