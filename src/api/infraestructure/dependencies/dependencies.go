@@ -42,6 +42,10 @@ func Start() *HandlerContainer {
 		Buildings: dbContainer.Buildings,
 	}
 
+	announcementRepository := store.AnnouncementRepository{
+		Announcements: dbContainer.Announcements,
+	}
+
 	//Usecase injection
 	loginUseCase := &login.Implementation{
 		UserRepository: &userRepository,
