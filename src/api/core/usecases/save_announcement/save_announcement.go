@@ -25,19 +25,19 @@ func (usecase Implementation) Execute(ctx context.Context, request save_announce
 	if err != nil {
 		return err
 	}
-	building, err := usecase.BuildingRepository.GetBuildingById(ctx, request.BuildingID)
+	building, err := usecase.BuildingRepository.GetBuildingById(ctx, request.Params.BuildingID())
 	if err != nil {
 		return errors.NewBadRequestError(err.Error())
 	}
 	if building == nil {
-		return errors.NewBadRequestError(fmt.Sprintf("building not found. building_id: %s", request.BuildingID.String()))
+		return errors.NewBadRequestError(fmt.Sprintf("building not found. building_id: %s", request.Params.RawBuildingID))
 	}
 	announcement := entities.Announcement{
 		User:     user.ToLw(),
 		Building: building.ToLw(),
-		Message:  request.Message,
-		Date:     request.Date,
-		Severity: request.Severity,
+		Message:  request.Body.Message,
+		Date:     request.Body.Date,
+		Severity: request.Body.Severity,
 	}
 	err = usecase.AnnouncementRepository.Save(ctx, announcement)
 	if err != nil {

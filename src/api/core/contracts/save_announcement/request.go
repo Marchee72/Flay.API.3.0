@@ -8,8 +8,22 @@ import (
 )
 
 type Request struct {
-	BuildingID primitive.ObjectID `json:"building_id"`
-	Message    string             `json:"message"`
-	Date       time.Time          `json:"date"`
-	Severity   constants.Severity `json:"severity"`
+	Body   Body
+	Params Params
+}
+
+type Body struct {
+	//BuildingID primitive.ObjectID `json:"building_id"`
+	Message  string             `json:"message"`
+	Date     time.Time          `json:"date"`
+	Severity constants.Severity `json:"severity"`
+}
+
+type Params struct {
+	RawBuildingID string `uri:"building_id"`
+}
+
+func (params *Params) BuildingID() primitive.ObjectID {
+	id, _ := primitive.ObjectIDFromHex(params.RawBuildingID)
+	return id
 }
