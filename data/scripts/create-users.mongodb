@@ -12,6 +12,7 @@ db.users.drop();
 db.buildings.drop();
 db.penalties.drop();
 db.bookings.drop();
+db.announcements.drop();
 
 // First create admin users
 db.users.insertMany([

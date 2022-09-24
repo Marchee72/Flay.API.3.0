@@ -3,7 +3,7 @@ package constants
 type Severity string
 
 const (
-	LowSeverity    Severity = "low"
-	NomarlSeverity Severity = "normal"
-	HighSeverity   Severity = "high"
+	LowSeverity    Severity = "LOW"
+	NomarlSeverity Severity = "NORMAL"
+	HighSeverity   Severity = "HIGH"
 )

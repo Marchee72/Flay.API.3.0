@@ -28,8 +28,12 @@ func (handler *SaveAnnouncement) handle(c *gin.Context) *api_errors.APIError {
 	ctx := context.Background()
 
 	request := save_announcement.Request{}
-	if err := c.ShouldBindJSON(&request); err != nil {
+	if err := c.ShouldBindJSON(&request.Body); err != nil {
 		log.Printf("Error binding request: %s", err.Error())
+		return errors.GetCommonsApiError(err)
+	}
+	if err := c.ShouldBindUri(&request.Params); err != nil {
+		log.Printf("Error binding params: %s", err.Error())
 		return errors.GetCommonsApiError(err)
 	}
 
