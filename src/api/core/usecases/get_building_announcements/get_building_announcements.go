@@ -1,0 +1,1 @@
+package get_building_announcements
