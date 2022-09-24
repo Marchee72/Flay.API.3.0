@@ -4,12 +4,12 @@ import (
 	"time"
 
 	"flay-api-v3.0/src/api/core/constants"
-	"flay-api-v3.0/src/api/core/entities/lw"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Request struct {
-	Building lw.BuildingLw      `json:"building"`
-	Message  string             `json:"message"`
-	Date     time.Time          `json:"date"`
-	Severity constants.Severity `json:"severity"`
+	BuildingID primitive.ObjectID `json:"building_id"`
+	Message    string             `json:"message"`
+	Date       time.Time          `json:"date"`
+	Severity   constants.Severity `json:"severity"`
 }

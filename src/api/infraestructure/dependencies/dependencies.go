@@ -74,6 +74,7 @@ func Start() *HandlerContainer {
 	saveAnnouncementUseCase := save_announcement.Implementation{
 		AnnouncementRepository: &announcementRepository,
 		UserRepository:         &userRepository,
+		BuildingRepository:     &buildingRepository,
 	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}

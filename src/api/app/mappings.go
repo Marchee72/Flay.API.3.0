@@ -10,9 +10,10 @@ var Router *gin.Engine
 func configureMappings(router *gin.Engine, handlers *dependencies.HandlerContainer) {
 	api := router.Group("/api")
 	api.POST("login", handlers.Login.Handle)
-	api.POST("booking", handlers.BookCommonSpace.Handle)
+	api.POST("booking", handlers.BookCommonSpace.Handle) //TODO: change url to building/:building_id/booking
 	api.GET("user/:user_id/bookings", handlers.GetUserBookings.Handle)
 	api.GET("building", handlers.GetUserBuilding.Handle)
 	api.GET("building/:building_id/bookings", handlers.GetBuildingBookings.Handle)
+	api.POST("building/:building_id/announcement", handlers.SaveAnnouncement.Handle)
 
 }
