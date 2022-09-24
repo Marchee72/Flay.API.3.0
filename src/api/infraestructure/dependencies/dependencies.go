@@ -9,6 +9,7 @@ import (
 	"flay-api-v3.0/src/api/core/usecases/get_user_bookings"
 	"flay-api-v3.0/src/api/core/usecases/get_user_building"
 	login "flay-api-v3.0/src/api/core/usecases/login"
+	"flay-api-v3.0/src/api/core/usecases/save_announcement"
 
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
 	store "flay-api-v3.0/src/api/infraestructure/repositories"
@@ -69,6 +70,11 @@ func Start() *HandlerContainer {
 	getBuildingBookingUseCase := get_building_bookings.Implementation{
 		BookingRepository: &bookingRepository,
 	}
+
+	saveAnnouncementUseCase := save_announcement.Implementation{
+		AnnouncementRepository: &announcementRepository,
+		UserRepository:         &userRepository,
+	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
 
@@ -90,6 +96,10 @@ func Start() *HandlerContainer {
 
 	apiHandlers.GetBuildingBookings = &handlers.GetBuildingBookings{
 		GetUserBookingsUseCase: getBuildingBookingUseCase,
+	}
+
+	apiHandlers.SaveAnnouncement = &handlers.SaveAnnouncement{
+		SaveAnnouncementUseCase: saveAnnouncementUseCase,
 	}
 
 	return &apiHandlers
