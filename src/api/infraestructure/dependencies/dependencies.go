@@ -5,6 +5,7 @@ import (
 
 	database "flay-api-v3.0/src/api/config"
 	"flay-api-v3.0/src/api/core/usecases/book_common_space"
+	"flay-api-v3.0/src/api/core/usecases/get_building_announcements"
 	"flay-api-v3.0/src/api/core/usecases/get_building_bookings"
 	"flay-api-v3.0/src/api/core/usecases/get_user_bookings"
 	"flay-api-v3.0/src/api/core/usecases/get_user_building"
@@ -76,6 +77,10 @@ func Start() *HandlerContainer {
 		UserRepository:         &userRepository,
 		BuildingRepository:     &buildingRepository,
 	}
+
+	getBuildingAnnouncementsUseCase := get_building_announcements.Implementation{
+		AnnouncementRepository: &announcementRepository,
+	}
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
 
@@ -96,11 +101,15 @@ func Start() *HandlerContainer {
 	}
 
 	apiHandlers.GetBuildingBookings = &handlers.GetBuildingBookings{
-		GetUserBookingsUseCase: getBuildingBookingUseCase,
+		GetBuildingBookingsUseCase: getBuildingBookingUseCase,
 	}
 
 	apiHandlers.SaveAnnouncement = &handlers.SaveAnnouncement{
 		SaveAnnouncementUseCase: saveAnnouncementUseCase,
+	}
+
+	apiHandlers.GetBuildingAnnouncements = &handlers.GetBuildingAnnouncements{
+		GetBuildingAnnouncementsUseCase: getBuildingAnnouncementsUseCase,
 	}
 
 	return &apiHandlers
