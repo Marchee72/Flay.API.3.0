@@ -57,3 +57,7 @@ db.bookings.insertMany([
   {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-08-01T20:10:15Z"), "shift": "TARDE"},
 
 ])
+
+db.announcements.insertMany([
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-06-01T06:31:15Z"), "severity": "LOW"},
+])
