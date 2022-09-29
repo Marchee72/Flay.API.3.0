@@ -35,6 +35,7 @@ func (usecase Implementation) Execute(ctx context.Context, request save_announce
 	announcement := entities.Announcement{
 		User:     user.ToLw(),
 		Building: building.ToLw(),
+		Title:    request.Body.Title,
 		Message:  request.Body.Message,
 		Date:     request.Body.Date,
 		Severity: request.Body.Severity,

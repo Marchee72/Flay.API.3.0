@@ -14,6 +14,7 @@ type Request struct {
 
 type Body struct {
 	//BuildingID primitive.ObjectID `json:"building_id"`
+	Title    string             `json:title`
 	Message  string             `json:"message"`
 	Date     time.Time          `json:"date"`
 	Severity constants.Severity `json:"severity"`
