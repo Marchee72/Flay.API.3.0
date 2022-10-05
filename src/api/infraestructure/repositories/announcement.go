@@ -25,7 +25,7 @@ func (repository *AnnouncementRepository) GetBuildingAnnouncements(ctx context.C
 	if date != nil {
 		filter = bson.M{"building._id": buildingID, "date": date}
 	} else {
-		filter = bson.M{"building._id": buildingID, "date": bson.M{"$gte": from}}
+		filter = bson.M{"building._id": buildingID /*, "date": bson.M{"$gte": from}*/}
 	}
 	cursor, err := repository.Announcements.Find(ctx, filter)
 	if err != nil {
