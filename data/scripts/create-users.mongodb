@@ -52,12 +52,14 @@ db.penalties.insertMany([
 ]);
 
 db.bookings.insertMany([
-  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-06-01T06:31:15Z"), "shift": "TARDE"},
-  {"user": {"_id": user2._id, "name": user2.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-07-09T06:32:15Z"), "shift": "NOCHE"},
-  {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-08-01T20:10:15Z"), "shift": "TARDE"},
+  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-10-01T06:31:15Z"), "shift": "TARDE"},
+  {"user": {"_id": user2._id, "name": user2.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-10-09T06:32:15Z"), "shift": "NOCHE"},
+  {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-12-01T20:10:15Z"), "shift": "TARDE"},
 
 ])
 
 db.announcements.insertMany([
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-06-01T06:31:15Z"), "severity": "LOW"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "Primer anuncio de la admin", "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-12-12T06:31:15Z"), "severity": "LOW"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "Esto es otro anuncio mas!","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": " HIGH"},
+
 ])
