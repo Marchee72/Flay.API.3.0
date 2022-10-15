@@ -59,7 +59,10 @@ db.bookings.insertMany([
 ])
 
 db.announcements.insertMany([
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "Primer anuncio de la admin", "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-12-12T06:31:15Z"), "severity": "LOW"},
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "Esto es otro anuncio mas!","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": " HIGH"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "LOW anuncio de la admin", "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-12-12T06:31:15Z"), "severity": "LOW"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "HIGH anuncio de la admin","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "HIGH"},
+    {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "NORMAL anuncio de la admin","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "NORMAL"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "INFO anuncio de la admin","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "INFO"},
+
 
 ])
