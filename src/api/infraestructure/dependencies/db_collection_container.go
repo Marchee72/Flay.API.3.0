@@ -10,6 +10,7 @@ type CollectionContainer struct {
 	Issues        *mongo.Collection
 	Buildings     *mongo.Collection
 	Announcements *mongo.Collection
+	Apartments    *mongo.Collection
 }
 
 func NewCollectionContainer(db *mongo.Database) CollectionContainer {
@@ -21,6 +22,7 @@ func NewCollectionContainer(db *mongo.Database) CollectionContainer {
 		Issues:        db.Collection("issues"),
 		Buildings:     db.Collection("buildings"),
 		Announcements: db.Collection("announcements"),
+		Apartments:    db.Collection("apartments"),
 	}
 
 }

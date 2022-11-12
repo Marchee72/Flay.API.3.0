@@ -12,6 +12,10 @@ const (
 	UserOwner  UserType = "owner"
 )
 
+func AnyUserType() []UserType {
+	return []UserType{UserRenter, UserAdmin, UserOwner}
+}
+
 func (userType UserType) Equals(t interface{}) bool {
 	stringType := fmt.Sprintf("%v", t)
 	return stringType == string(userType)
