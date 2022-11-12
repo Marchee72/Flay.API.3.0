@@ -8,5 +8,5 @@ import (
 )
 
 type ApartmentRepository interface {
-	GetApartmentByUserID(ctx context.Context, userID primitive.ObjectID) (*entities.Apartment, error)
+	GetApartment(ctx context.Context, apartmentID primitive.ObjectID) (*entities.Apartment, error)
 }

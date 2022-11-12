@@ -123,5 +123,9 @@ func Start() *HandlerContainer {
 		GetBuildingAnnouncementsUseCase: getBuildingAnnouncementsUseCase,
 	}
 
+	apiHandlers.GetUserBasicInfo = &handlers.GetUserBasicInfo{
+		GetUserBasicInfoUseCase: getUserBasicInfoUseCase,
+	}
+
 	return &apiHandlers
 }

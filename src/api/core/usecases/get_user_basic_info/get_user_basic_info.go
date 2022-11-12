@@ -28,7 +28,7 @@ func (usecase Implementation) Execute(ctx context.Context, userID primitive.Obje
 	if err != nil {
 		return nil, err
 	}
-	apartment, err := usecase.ApartmentRepository.GetApartmentByUserID(ctx, userID)
+	apartment, err := usecase.ApartmentRepository.GetApartment(ctx, user.Apartment.ID)
 	if err != nil {
 		return nil, err
 	}
