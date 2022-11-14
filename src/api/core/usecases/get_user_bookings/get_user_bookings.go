@@ -16,7 +16,7 @@ type Implementation struct {
 }
 
 func (usecase Implementation) Execute(ctx context.Context, request get_user_bookings.Request) (*get_user_bookings.Response, error) {
-	bookings, err := usecase.BookingRepository.GetUserBookings(ctx, request.UserID)
+	bookings, err := usecase.BookingRepository.GetUserBookings(ctx, request.UserID())
 	if err != nil {
 		return nil, err
 	}
