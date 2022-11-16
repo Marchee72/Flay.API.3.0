@@ -55,10 +55,10 @@ var celenia12C = db.apartments.findOne({"building._id": celenia1._id, "flat": "C
 var celenia14B = db.apartments.findOne({"building._id": celenia1._id, "flat": "B", "floor": 4});
 
 db.users.insertMany([
-  { "username": "user1",  "password": "user1",  "name": "user1",  "email": "user1@flay.com" , "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia11A._id, "floor": celenia11A.floor, "flat": celenia11A.flat  }  },
-  { "username": "user2",  "password": "user2",  "name": "user2" , "email": "user2@flay.com" , "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia11B._id, "floor": celenia11B.floor, "flat": celenia11B.flat  }  } ,
-  { "username": "inqui1", "password": "inqui1", "name": "inqui1", "email": "inqui1@flay.com", "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia12C._id, "floor": celenia12C.floor, "flat": celenia12C.flat  }  },
-  { "username": "inqui2", "password": "inqui2", "name": "inqui2", "email": "inqui2@flay.com", "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia14B._id, "floor": celenia14B.floor, "flat": celenia14B.flat  }  },
+  { "username": "user1",  "password": "user1",  "name": "user1",  "email": "user1@flay.com" , "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat}  },
+  { "username": "user2",  "password": "user2",  "name": "user2" , "email": "user2@flay.com" , "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat}  } ,
+  { "username": "inqui1", "password": "inqui1", "name": "inqui1", "email": "inqui1@flay.com", "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat}  },
+  { "username": "inqui2", "password": "inqui2", "name": "inqui2", "email": "inqui2@flay.com", "type": "renter", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia14B._id, "name": celenia14B.floor + "-" + celenia14B.flat}  },
 ]);
 
 var user1 = db.users.findOne({"username": "user1"});
