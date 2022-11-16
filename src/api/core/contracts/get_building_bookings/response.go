@@ -16,6 +16,7 @@ type Response struct {
 type booking struct {
 	ID          primitive.ObjectID `json:"id"`
 	User        common.UserLw      `json:"user"`
+	Apartment   common.Apartment   `json:"apartment"`
 	CommonSpace string             `json:"common_space"`
 	Building    common.BuildingLw  `json:"building"`
 	Date        time.Time          `json:"date"`

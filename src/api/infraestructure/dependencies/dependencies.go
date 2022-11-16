@@ -66,6 +66,7 @@ func Start() *HandlerContainer {
 
 	getUserBookingsUseCase := get_user_bookings.Implementation{
 		BookingRepository: &bookingRepository,
+		UserRepository:    &userRepository,
 	}
 
 	getUserBuildingUseCase := get_user_building.Implementation{
@@ -75,6 +76,7 @@ func Start() *HandlerContainer {
 
 	getBuildingBookingUseCase := get_building_bookings.Implementation{
 		BookingRepository: &bookingRepository,
+		UserRepository:    &userRepository,
 	}
 
 	saveAnnouncementUseCase := save_announcement.Implementation{
