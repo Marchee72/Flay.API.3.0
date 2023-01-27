@@ -72,9 +72,9 @@ db.penalties.insertMany([
 ]);
 
 db.bookings.insertMany([
-  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-10-01T06:31:15Z"), "shift": "TARDE"},
-  {"user": {"_id": user2._id, "name": user2.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-10-09T06:32:15Z"), "shift": "NOCHE"},
-  {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2022-12-01T20:10:15Z"), "shift": "TARDE"},
+  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2023-12-01T06:31:15Z"), "shift": "TARDE"},
+  {"user": {"_id": user2._id, "name": user2.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2023-12-09T06:32:15Z"), "shift": "NOCHE"},
+  {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2023-12-01T20:10:15Z"), "shift": "TARDE"},
 
 ]);
 

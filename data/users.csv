@@ -1,4 +1,0 @@
-username,password,name,email,type
-admin,admin,admin,admin@admin.com,admin
-user1,user1,user1,user1@flay.com,owner
-user2,user2,user2,user2@flay.com,renter
