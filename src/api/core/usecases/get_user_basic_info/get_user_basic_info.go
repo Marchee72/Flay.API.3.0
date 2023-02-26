@@ -24,6 +24,7 @@ func (usecase Implementation) Execute(ctx context.Context, userID primitive.Obje
 	if err != nil {
 		return nil, err
 	}
+	// TODO: si el usuario es admin no va a tener building id
 	building, err := usecase.BuildingRepository.GetBuildingById(ctx, user.Building.ID)
 	if err != nil {
 		return nil, err
