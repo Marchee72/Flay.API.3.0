@@ -2,14 +2,15 @@ package constants
 
 import (
 	"fmt"
+	"strings"
 )
 
 type UserType string
 
 const (
-	UserAdmin  UserType = "admin"
-	UserRenter UserType = "renter"
-	UserOwner  UserType = "owner"
+	UserAdmin  UserType = "ADMIN"
+	UserRenter UserType = "RENTER"
+	UserOwner  UserType = "OWNER"
 )
 
 func AnyUserType() []UserType {
@@ -18,10 +19,11 @@ func AnyUserType() []UserType {
 
 func (userType UserType) Equals(t interface{}) bool {
 	stringType := fmt.Sprintf("%v", t)
-	return stringType == string(userType)
+	return strings.ToUpper(stringType) == string(userType)
 }
 
 func ToUserType(userType string) (*UserType, error) {
+	userType = strings.ToUpper(userType)
 	var parsedType UserType
 	var err error
 	switch userType {

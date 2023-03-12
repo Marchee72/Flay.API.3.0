@@ -3,6 +3,7 @@ package save_announcement
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"flay-api-v3.0/src/api/core/contracts/save_announcement"
 	"flay-api-v3.0/src/api/core/entities"
@@ -37,7 +38,7 @@ func (usecase Implementation) Execute(ctx context.Context, request save_announce
 		Building: building.ToLw(),
 		Title:    request.Body.Title,
 		Message:  request.Body.Message,
-		Date:     request.Body.Date,
+		Date:     time.Now(),
 		Severity: request.Body.Severity,
 	}
 	err = usecase.AnnouncementRepository.Save(ctx, announcement)

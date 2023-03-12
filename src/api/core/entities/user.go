@@ -17,5 +17,5 @@ type User struct {
 }
 
 func (u User) ToLw() lw.UserLw {
-	return lw.UserLw{ID: u.ID, Username: u.UserName}
+	return lw.UserLw{ID: u.ID, Username: u.UserName, Type: u.UserType}
 }
