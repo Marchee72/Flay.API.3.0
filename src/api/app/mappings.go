@@ -17,4 +17,5 @@ func configureMappings(router *gin.Engine, handlers *dependencies.HandlerContain
 	api.GET("building/:building_id/bookings", handlers.GetBuildingBookings.Handle)
 	api.POST("building/:building_id/announcement", handlers.SaveAnnouncement.Handle)
 	api.GET("building/:building_id/announcements", handlers.GetBuildingAnnouncements.Handle)
+	api.GET("announcements/:announcement_id", handlers.GetAnnouncement.Handle)
 }

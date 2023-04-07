@@ -37,3 +37,11 @@ func (repository *AnnouncementRepository) GetBuildingAnnouncements(ctx context.C
 	}
 	return result, nil
 }
+
+func (repository *AnnouncementRepository) GetAnnouncement(ctx context.Context, announcementID primitive.ObjectID) (*entities.Announcement, error) {
+	var result entities.Announcement
+	if err := repository.Announcements.FindOne(ctx, bson.M{"_id": announcementID}).Decode(&result); err != nil && err != mongo.ErrNoDocuments {
+		return nil, err
+	}
+	return &result, nil
+}

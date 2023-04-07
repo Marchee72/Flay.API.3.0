@@ -1,6 +1,9 @@
 package dependencies
 
-import "go.mongodb.org/mongo-driver/mongo"
+import (
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/gridfs"
+)
 
 type CollectionContainer struct {
 	Users         *mongo.Collection
@@ -11,6 +14,7 @@ type CollectionContainer struct {
 	Buildings     *mongo.Collection
 	Announcements *mongo.Collection
 	Apartments    *mongo.Collection
+	Expenses      *gridfs.Bucket
 }
 
 func NewCollectionContainer(db *mongo.Database) CollectionContainer {

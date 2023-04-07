@@ -10,6 +10,8 @@ func GetCommonsApiError(err error) *api_errors.APIError {
 		return newBadRequestApiError(err)
 	case UnauthorizedError:
 		return newUnauthorizedError(err)
+	case ResourceNotFoundError:
+		return newResourceNotFoundError(err)
 	default:
 		return newInternalServerError(err)
 	}
@@ -31,5 +33,11 @@ func newInternalServerError(err error) *api_errors.APIError {
 func newUnauthorizedError(err error) *api_errors.APIError {
 	apiError := api_errors.NewUnauthorizedError(err.Error())
 	apiError.Cause = err.(UnauthorizedError).Cause()
+	return apiError
+}
+
+func newResourceNotFoundError(err error) *api_errors.APIError {
+	apiError := api_errors.NewResourceNotFound(err.Error())
+	apiError.Cause = err.(ResourceNotFoundError).Cause()
 	return apiError
 }
