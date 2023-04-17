@@ -2,7 +2,6 @@ package dependencies
 
 import (
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/gridfs"
 )
 
 type CollectionContainer struct {
@@ -14,7 +13,7 @@ type CollectionContainer struct {
 	Buildings     *mongo.Collection
 	Announcements *mongo.Collection
 	Apartments    *mongo.Collection
-	Expenses      *gridfs.Bucket
+	Expenses      *mongo.Collection
 }
 
 func NewCollectionContainer(db *mongo.Database) CollectionContainer {
@@ -27,6 +26,7 @@ func NewCollectionContainer(db *mongo.Database) CollectionContainer {
 		Buildings:     db.Collection("buildings"),
 		Announcements: db.Collection("announcements"),
 		Apartments:    db.Collection("apartments"),
+		Expenses:      db.Collection("fs.expenses"),
 	}
 
 }

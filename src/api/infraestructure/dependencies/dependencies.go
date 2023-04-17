@@ -13,6 +13,7 @@ import (
 	"flay-api-v3.0/src/api/core/usecases/get_user_building"
 	login "flay-api-v3.0/src/api/core/usecases/login"
 	"flay-api-v3.0/src/api/core/usecases/save_announcement"
+	"flay-api-v3.0/src/api/core/usecases/save_expense_file"
 
 	"flay-api-v3.0/src/api/infraestructure/entrypoints/handlers"
 	store "flay-api-v3.0/src/api/infraestructure/repositories"
@@ -52,6 +53,10 @@ func Start() *HandlerContainer {
 
 	apartmentRepository := store.ApartmentRepository{
 		Apartments: dbContainer.Apartments,
+	}
+
+	expenseRepository := store.ExpenseRepository{
+		Expenses: dbContainer.Expenses,
 	}
 
 	//Usecase injection
@@ -99,6 +104,11 @@ func Start() *HandlerContainer {
 	getAnnouncementUseCase := get_announcement.Implementation{
 		AnnouncementRepository: &announcementRepository,
 	}
+
+	saveExpenseFileUseCase := save_expense_file.Implementation{
+		ExpenseRepository: &expenseRepository,
+	}
+
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
 
@@ -136,6 +146,10 @@ func Start() *HandlerContainer {
 
 	apiHandlers.GetAnnouncement = &handlers.GetAnnouncement{
 		GetAnnouncementUseCase: getAnnouncementUseCase,
+	}
+
+	apiHandlers.SaveExpenseFile = &handlers.SaveExpenseFile{
+		SaveExpenseFileUseCase: saveExpenseFileUseCase,
 	}
 
 	return &apiHandlers
