@@ -9,7 +9,8 @@ import (
 
 type Expense struct {
 	Filename string        `bson:"filename"`
-	Renter   lw.UserLw     `bson:"user"`
+	Unit     Unit          `bson:"unit"`
+	Building lw.BuildingLw `bson:"building"`
 	Date     time.Time     `bson:"date"`
 	Month    time.Month    `bson:"month"`
 	Year     int           `bson:"year"`
@@ -23,10 +24,11 @@ func (expense *Expense) SetFile(file []byte) {
 	}
 }
 
-func NewExpense(name string, renter lw.UserLw, month time.Month, year int, file []byte) Expense {
+func NewExpense(name string, building lw.BuildingLw, unit Unit, month time.Month, year int, file []byte) Expense {
 	expense := Expense{
 		Filename: name,
-		Renter:   renter,
+		Building: building,
+		Unit:     unit,
 		Date:     time.Now(),
 		Month:    month,
 		Year:     year,

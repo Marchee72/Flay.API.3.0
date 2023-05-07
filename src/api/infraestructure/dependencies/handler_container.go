@@ -13,4 +13,5 @@ type HandlerContainer struct {
 	GetBuildingAnnouncements entrypoints.Handler
 	GetUserBasicInfo         entrypoints.Handler
 	SaveExpenseFile          entrypoints.Handler
+	GetUnitExpenses          entrypoints.Handler
 }

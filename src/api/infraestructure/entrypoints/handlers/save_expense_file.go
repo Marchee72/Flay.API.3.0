@@ -27,7 +27,7 @@ func (handler *SaveExpenseFile) handle(c *gin.Context) *api_errors.APIError {
 	ctx := context.Background()
 
 	request := contract.Request{}
-	if err := c.ShouldBindJSON(&request); err != nil {
+	if err := c.ShouldBind(&request); err != nil {
 		log.Printf("Error binding request: %s", err.Error())
 		return errors.GetCommonsApiError(err)
 	}
