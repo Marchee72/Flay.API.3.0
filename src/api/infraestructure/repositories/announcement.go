@@ -31,6 +31,7 @@ func (repository *AnnouncementRepository) GetBuildingAnnouncements(ctx context.C
 	if err != nil {
 		return nil, err
 	}
+	defer cursor.Close(ctx)
 	var result []entities.Announcement
 	if err = cursor.All(ctx, &result); err != nil {
 		return nil, err

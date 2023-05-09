@@ -30,6 +30,9 @@ func Start() *HandlerContainer {
 	//DB injection
 	dbContainer := NewCollectionContainer(db)
 
+	fileRepository := store.FileRepository{
+		Files: dbContainer.Files,
+	}
 	userRepository := store.UserRepository{
 		Users: dbContainer.Users,
 	}
@@ -58,6 +61,7 @@ func Start() *HandlerContainer {
 
 	expenseRepository := store.ExpenseRepository{
 		Expenses: dbContainer.Expenses,
+		Files:    &fileRepository,
 	}
 
 	//Usecase injection

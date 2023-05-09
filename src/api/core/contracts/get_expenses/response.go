@@ -19,7 +19,7 @@ func (resp *Response) AddExpense(e entities.Expense) {
 		Date:     e.Date,
 		Month:    e.Month,
 		Year:     e.Year,
-		File:     e.Content.Value,
+		File:     e.File,
 	}
 	resp.Expenses = append(resp.Expenses, newExpense)
 }

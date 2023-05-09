@@ -5,6 +5,7 @@ import (
 )
 
 type CollectionContainer struct {
+	Files         *mongo.Collection
 	Users         *mongo.Collection
 	CommonSpaces  *mongo.Collection
 	Penalties     *mongo.Collection
@@ -18,6 +19,7 @@ type CollectionContainer struct {
 
 func NewCollectionContainer(db *mongo.Database) CollectionContainer {
 	return CollectionContainer{
+		Files:         db.Collection("files"),
 		Users:         db.Collection("users"),
 		CommonSpaces:  db.Collection("common_spaces"),
 		Penalties:     db.Collection("penalties"),
@@ -26,7 +28,7 @@ func NewCollectionContainer(db *mongo.Database) CollectionContainer {
 		Buildings:     db.Collection("buildings"),
 		Announcements: db.Collection("announcements"),
 		Apartments:    db.Collection("apartments"),
-		Expenses:      db.Collection("fs.expenses"),
+		Expenses:      db.Collection("expenses"),
 	}
 
 }

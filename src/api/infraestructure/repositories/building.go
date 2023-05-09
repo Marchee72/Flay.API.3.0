@@ -26,6 +26,7 @@ func (repository *BuildingRepository) GetBuildings(ctx context.Context, ids []pr
 	if err != nil {
 		return nil, err
 	}
+	defer cursor.Close(ctx)
 	var result []entities.Building
 	if err = cursor.All(ctx, &result); err != nil {
 		return nil, err

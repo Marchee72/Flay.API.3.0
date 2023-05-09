@@ -40,6 +40,7 @@ func (repository *IssueRepository) getIssues(ctx context.Context, filter bson.M)
 	if err != nil {
 		return nil, err
 	}
+	defer cursor.Close(ctx)
 	var response []entities.Issue
 	if err = cursor.All(ctx, &response); err != nil {
 		return nil, err

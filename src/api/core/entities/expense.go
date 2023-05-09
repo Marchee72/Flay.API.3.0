@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"flay-api-v3.0/src/api/core/entities/lw"
-	"go.mongodb.org/mongo-driver/bson"
 )
 
 type Expense struct {
@@ -14,15 +13,15 @@ type Expense struct {
 	Date     time.Time     `bson:"date"`
 	Month    time.Month    `bson:"month"`
 	Year     int           `bson:"year"`
-	Content  bson.RawValue `bson:"content"`
+	File     []byte
 }
 
-func (expense *Expense) SetFile(file []byte) {
-	expense.Content = bson.RawValue{
-		Type:  bson.TypeBinary,
-		Value: file,
-	}
-}
+// func (expense *Expense) SetFile(file []byte) {
+// 	expense.File = bson.RawValue{
+// 		Type:  bson.TypeBinary,
+// 		Value: file,
+// 	}
+// }
 
 func NewExpense(name string, building lw.BuildingLw, unit Unit, month time.Month, year int, file []byte) Expense {
 	expense := Expense{
@@ -32,7 +31,8 @@ func NewExpense(name string, building lw.BuildingLw, unit Unit, month time.Month
 		Date:     time.Now(),
 		Month:    month,
 		Year:     year,
+		File:     file,
 	}
-	expense.SetFile(file)
+	//expense.SetFile(file)
 	return expense
 }
