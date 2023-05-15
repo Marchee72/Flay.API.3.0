@@ -5,6 +5,7 @@ import (
 
 	"flay-api-v3.0/src/api/core/contracts/common"
 	"flay-api-v3.0/src/api/core/entities"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Response struct {
@@ -19,17 +20,16 @@ func (resp *Response) AddExpense(e entities.Expense) {
 		Date:     e.Date,
 		Month:    e.Month,
 		Year:     e.Year,
-		File:     e.File,
 	}
 	resp.Expenses = append(resp.Expenses, newExpense)
 }
 
 type expense struct {
-	Filename string            `json:"filename"`
-	Building common.BuildingLw `json:"building"`
-	Unit     string            `json:"unit"`
-	Date     time.Time         `json:"date"`
-	Month    time.Month        `json:"month"`
-	Year     int               `json:"year"`
-	File     []byte            `json:"file" binding:"required"`
+	ID       primitive.ObjectID `json:"id"`
+	Filename string             `json:"filename"`
+	Building common.BuildingLw  `json:"building"`
+	Unit     string             `json:"unit"`
+	Date     time.Time          `json:"date"`
+	Month    time.Month         `json:"month"`
+	Year     int                `json:"year"`
 }

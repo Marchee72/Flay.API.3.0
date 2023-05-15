@@ -14,4 +14,5 @@ type HandlerContainer struct {
 	GetUserBasicInfo         entrypoints.Handler
 	SaveExpenseFile          entrypoints.Handler
 	GetUnitExpenses          entrypoints.Handler
+	GetFile                  entrypoints.Handler
 }
