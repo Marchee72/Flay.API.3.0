@@ -19,6 +19,8 @@ func Start() {
 	router = gin.Default()
 	var corsConfig = cors.DefaultConfig()
 	corsConfig.AddAllowHeaders("Authorization")
+	corsConfig.AddAllowHeaders("Content-Disposition")
+
 	corsConfig.AllowAllOrigins = true
 	corsConfig.AllowMethods = append(corsConfig.AllowMethods, "GET", "POST", "PUT", "DELETE")
 	router.Use(cors.New(corsConfig))

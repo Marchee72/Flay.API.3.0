@@ -39,7 +39,7 @@ func (repository *FileRepository) GetFile(ctx context.Context, contentId primiti
 	if err != nil {
 		return nil, err
 	}
-	defer cursor.Close(context.Background())
+	defer cursor.Close(ctx)
 
 	var reconstructedFile []byte
 	for cursor.Next(ctx) {

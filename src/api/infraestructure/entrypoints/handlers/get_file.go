@@ -35,10 +35,11 @@ func (handler *GetFile) handle(c *gin.Context) *api_errors.APIError {
 		log.Printf("Error getting file: %s", err.Error())
 		return errors.GetCommonsApiError(err)
 	}
-	c.Header("Content-Type", "application/octet-stream")
-	c.Header("Content-Disposition", "attachment; filename=myfile.txt")
+	c.Header("Content-Type", "application/pdf")
+	filename := request.ContentRawId + ".pdf"
+	c.Header("Content-Disposition", "attachment; filename="+filename)
 
 	// Write the file content to the response
-	c.Data(http.StatusOK, "application/octet-stream", response)
+	c.Data(http.StatusOK, "application/pdf", response)
 	return nil
 }
