@@ -14,6 +14,7 @@ type Response struct {
 
 func (resp *Response) AddExpense(e entities.Expense) {
 	newExpense := expense{
+		ID:       e.ID,
 		Filename: e.Filename,
 		Building: common.NewBuildingLw(e.Building),
 		Unit:     e.Unit.String(),

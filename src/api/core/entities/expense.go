@@ -4,15 +4,17 @@ import (
 	"time"
 
 	"flay-api-v3.0/src/api/core/entities/lw"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Expense struct {
-	Filename string        `bson:"filename"`
-	Unit     Unit          `bson:"unit"`
-	Building lw.BuildingLw `bson:"building"`
-	Date     time.Time     `bson:"date"`
-	Month    time.Month    `bson:"month"`
-	Year     int           `bson:"year"`
+	ID       primitive.ObjectID `bson:"_id"`
+	Filename string             `bson:"filename"`
+	Unit     Unit               `bson:"unit"`
+	Building lw.BuildingLw      `bson:"building"`
+	Date     time.Time          `bson:"date"`
+	Month    time.Month         `bson:"month"`
+	Year     int                `bson:"year"`
 	File     []byte
 }
 
