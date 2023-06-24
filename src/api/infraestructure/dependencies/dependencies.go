@@ -5,6 +5,7 @@ import (
 
 	database "flay-api-v3.0/src/api/config"
 	"flay-api-v3.0/src/api/core/usecases/book_common_space"
+	"flay-api-v3.0/src/api/core/usecases/get_admin_announcements"
 	"flay-api-v3.0/src/api/core/usecases/get_announcement"
 	"flay-api-v3.0/src/api/core/usecases/get_building_announcements"
 	"flay-api-v3.0/src/api/core/usecases/get_building_bookings"
@@ -123,6 +124,11 @@ func Start() *HandlerContainer {
 		FileRepository: &fileRepository,
 	}
 
+	getAdminAnnouncements := get_admin_announcements.Implementation{
+		AnnouncementRepositorty: &announcementRepository,
+		BuildingRepository:      &buildingRepository,
+	}
+
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
 
@@ -171,6 +177,10 @@ func Start() *HandlerContainer {
 	}
 	apiHandlers.GetFile = &handlers.GetFile{
 		GetFileUseCase: getFile,
+	}
+
+	apiHandlers.GetAdminAnnouncements = &handlers.GetAdminAnnouncements{
+		GetAdminAnnouncementUseCase: getAdminAnnouncements,
 	}
 
 	return &apiHandlers

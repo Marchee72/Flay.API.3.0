@@ -1,4 +1,4 @@
-package get_building_announcements
+package get_admin_announcements
 
 import (
 	"flay-api-v3.0/src/api/core/contracts/common"

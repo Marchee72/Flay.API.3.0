@@ -25,12 +25,16 @@ var admin1 = db.users.findOne({"username": "admin1"});
 var admin2 = db.users.findOne({"username": "admin2"});
 
 db.buildings.insertMany([
-  {"name": "Celenia 1", "address": "Mendoza 2656", "common_spaces": [{"name": "terraza", "type": "terrace"}, {"name": "salon", "type": "lounge"}], "ADMIN": {"_id": admin1._id, "name": admin1.name}},
-  {"name": "Celenia 2", "address": "Cordoba 743", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "ADMIN": {"_id": admin2._id, "name": admin2.name}}
+  {"name": "Celenia 1", "address": "Mendoza 2656", "common_spaces": [{"name": "terraza", "type": "terrace"}, {"name": "salon", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
+  {"name": "Celenia 2", "address": "Cordoba 743", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin2._id, "name": admin2.name}},
+  {"name": "Fuerte apache", "address": "Jujuy 203", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
+  {"name": "MAUI", "address": "Cerrito 1442", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
 ]);
 
 var celenia1 = db.buildings.findOne({"name": "Celenia 1"});
 var celenia2 = db.buildings.findOne({"name": "Celenia 2"});
+var fuerteApache = db.buildings.findOne({"name": "Fuerte apache"});
+var MAUI = db.buildings.findOne({"name": "MAUI"});
 
 db.users.insertMany([
   { "username": "owner1", "password": "owner1", "name": "owner1", "email": "owner1@flay.com", "type": "OWNER" , "building": {"_id": celenia1._id, "name": celenia1.name }  },
@@ -41,12 +45,12 @@ var owner1 = db.users.findOne({"username": "owner1"});
 var owner2 = db.users.findOne({"username": "owner2"});
 
 db.apartments.insertMany([
-  {"OWNER":{"_id": owner1._id, "name": owner1.name}, "floor": 1, "flat": "A", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"OWNER":{"_id": owner1._id, "name": owner1.name}, "floor": 1, "flat": "B", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"OWNER":{"_id": owner1._id, "name": owner1.name}, "floor": 2, "flat": "C", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"OWNER":{"_id": owner2._id, "name": owner2.name}, "floor": 3, "flat": "D", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"OWNER":{"_id": owner2._id, "name": owner2.name}, "floor": 4, "flat": "B", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"OWNER":{"_id": owner2._id, "name": owner2.name}, "floor": 9, "flat": "C", "building": {"_id": celenia1._id, "name": celenia1.name}}
+  {"owner":{"_id": owner1._id, "name": owner1.name}, "floor": 1, "flat": "A", "building": {"_id": celenia1._id, "name": celenia1.name}},
+  {"owner":{"_id": owner1._id, "name": owner1.name}, "floor": 1, "flat": "B", "building": {"_id": celenia1._id, "name": celenia1.name}},
+  {"owner":{"_id": owner1._id, "name": owner1.name}, "floor": 2, "flat": "C", "building": {"_id": celenia1._id, "name": celenia1.name}},
+  {"owner":{"_id": owner2._id, "name": owner2.name}, "floor": 3, "flat": "D", "building": {"_id": celenia1._id, "name": celenia1.name}},
+  {"owner":{"_id": owner2._id, "name": owner2.name}, "floor": 4, "flat": "B", "building": {"_id": celenia1._id, "name": celenia1.name}},
+  {"owner":{"_id": owner2._id, "name": owner2.name}, "floor": 9, "flat": "C", "building": {"_id": celenia1._id, "name": celenia1.name}}
 ]);
 
 var celenia11A = db.apartments.findOne({"building._id": celenia1._id, "flat": "A", "floor": 1});
@@ -83,4 +87,6 @@ db.announcements.insertMany([
   {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "HIGH anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "HIGH"},
   {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "NORMAL anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "NORMAL"},
   {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "INFO anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "INFO"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": fuerteApache._id, "name": fuerteApache.name}, "title": "INFO anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2023-12-11T06:31:15Z"), "severity": "INFO"},
+  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": MAUI._id, "name": MAUI.name}, "title": "INFO anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2023-12-11T06:31:15Z"), "severity": "INFO"},
 ]);

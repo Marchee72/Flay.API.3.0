@@ -33,3 +33,16 @@ func (repository *BuildingRepository) GetBuildings(ctx context.Context, ids []pr
 	}
 	return result, nil
 }
+
+func (repository *BuildingRepository) GetBuildingsByAdmin(ctx context.Context, adminId primitive.ObjectID) ([]entities.Building, error) {
+	cursor, err := repository.Buildings.Find(ctx, bson.M{"admin._id": adminId})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+	var result []entities.Building
+	if err = cursor.All(ctx, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}

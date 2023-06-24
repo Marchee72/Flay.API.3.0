@@ -27,12 +27,14 @@ func (useCase Implementation) Execute(ctx context.Context, request get_announcem
 		return nil, errors.NewResourceNotFoundError(fmt.Sprintf("Announcement with ID: %s not found", request.AnnouncementRawID))
 	}
 	response := get_announcement.Response{
-		User:     common.NewUserLw(announcement.User),
-		Building: common.NewBuildingLw(announcement.Building),
-		Title:    announcement.Title,
-		Message:  announcement.Message,
-		Date:     announcement.Date,
-		Severity: announcement.Severity,
+		Announcement: common.Announcement{
+			User:     common.NewUserLw(announcement.User),
+			Building: common.NewBuildingLw(announcement.Building),
+			Title:    announcement.Title,
+			Message:  announcement.Message,
+			Date:     announcement.Date,
+			Severity: announcement.Severity,
+		},
 	}
 	return &response, nil
 }

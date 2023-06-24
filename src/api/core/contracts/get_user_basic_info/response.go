@@ -1,6 +1,7 @@
 package get_user_basic_info
 
 import (
+	"flay-api-v3.0/src/api/core/constants"
 	"flay-api-v3.0/src/api/core/contracts/common"
 	"flay-api-v3.0/src/api/core/entities"
 	"flay-api-v3.0/src/api/core/entities/lw"
@@ -27,8 +28,10 @@ func newApartment(ap entities.Apartment) apartment {
 	}
 }
 
-func (resp *Response) NewResponse(user lw.UserLw, building entities.Building, apartment entities.Apartment) {
+func (resp *Response) NewResponse(user lw.UserLw, building *entities.Building, apartment *entities.Apartment) {
 	resp.User = common.NewUserLw(user)
-	resp.Building = common.NewBuilding(building)
-	resp.Apartment = newApartment(apartment)
+	if user.Type != constants.UserAdmin {
+		resp.Building = common.NewBuilding(*building)
+		resp.Apartment = newApartment(*apartment)
+	}
 }

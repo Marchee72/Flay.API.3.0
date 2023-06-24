@@ -10,4 +10,5 @@ import (
 type BuildingRepository interface {
 	GetBuildingById(ctx context.Context, buildingID primitive.ObjectID) (*entities.Building, error)
 	GetBuildings(ctx context.Context, ids []primitive.ObjectID) ([]entities.Building, error)
+	GetBuildingsByAdmin(ctx context.Context, adminId primitive.ObjectID) ([]entities.Building, error)
 }

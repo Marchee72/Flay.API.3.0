@@ -15,4 +15,5 @@ type HandlerContainer struct {
 	SaveExpenseFile          entrypoints.Handler
 	GetUnitExpenses          entrypoints.Handler
 	GetFile                  entrypoints.Handler
+	GetAdminAnnouncements    entrypoints.Handler
 }
