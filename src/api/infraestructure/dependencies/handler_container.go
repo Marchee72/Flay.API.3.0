@@ -8,6 +8,7 @@ type HandlerContainer struct {
 	GetUserBookings          entrypoints.Handler
 	GetUserBuilding          entrypoints.Handler
 	GetBuildingBookings      entrypoints.Handler
+	GetBuildings             entrypoints.Handler
 	SaveAnnouncement         entrypoints.Handler
 	GetAnnouncement          entrypoints.Handler
 	GetBuildingAnnouncements entrypoints.Handler
