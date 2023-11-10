@@ -3,6 +3,7 @@ package store
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"flay-api-v3.0/src/api/core/entities"
 	"go.mongodb.org/mongo-driver/bson"
@@ -29,6 +30,19 @@ func (repository *ExpenseRepository) SaveExpense(ctx context.Context, expense en
 
 func (repository *ExpenseRepository) GetExpensesByUnit(ctx context.Context, unit entities.Unit) ([]entities.Expense, error) {
 	cursor, err := repository.Expenses.Find(ctx, bson.M{"unit.floor": unit.Floor, "unit.apartment": unit.Apartment})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+	var result []entities.Expense
+	if err = cursor.All(ctx, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (repository *ExpenseRepository) GetExpensesByBuilding(ctx context.Context, buildingID primitive.ObjectID, month time.Month, year int) ([]entities.Expense, error) {
+	cursor, err := repository.Expenses.Find(ctx, bson.M{"building._id": buildingID, "month": month, "year": year})
 	if err != nil {
 		return nil, err
 	}

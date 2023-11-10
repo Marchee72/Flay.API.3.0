@@ -9,6 +9,7 @@ import (
 	"flay-api-v3.0/src/api/core/usecases/get_announcement"
 	"flay-api-v3.0/src/api/core/usecases/get_building_announcements"
 	"flay-api-v3.0/src/api/core/usecases/get_building_bookings"
+	"flay-api-v3.0/src/api/core/usecases/get_building_expenses"
 	"flay-api-v3.0/src/api/core/usecases/get_buildings"
 	"flay-api-v3.0/src/api/core/usecases/get_file"
 	"flay-api-v3.0/src/api/core/usecases/get_unit_expenses"
@@ -134,6 +135,10 @@ func Start() *HandlerContainer {
 		BuildingRepository: &buildingRepository,
 	}
 
+	getBuildingExpenses := get_building_expenses.Implementation{
+		ExpenseRepository: &expenseRepository,
+	}
+
 	//Handlers injection
 	apiHandlers := HandlerContainer{}
 
@@ -191,5 +196,10 @@ func Start() *HandlerContainer {
 	apiHandlers.GetBuildings = &handlers.GetBuildings{
 		GetBuildingsUseCase: getBuildings,
 	}
+
+	apiHandlers.GetBuildingExpenses = &handlers.GetBuildingExpenses{
+		GetBuildingExpensesUseCase: &getBuildingExpenses,
+	}
+
 	return &apiHandlers
 }

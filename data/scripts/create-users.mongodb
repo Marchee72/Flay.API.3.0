@@ -14,79 +14,105 @@ db.penalties.drop();
 db.bookings.drop();
 db.apartments.drop();
 db.announcements.drop();
+db.expenses.drop();
+print("Db collections dropped.");
+
+
 
 // First create ADMIN usersesta abajo ahora?
 db.users.insertMany([
   { "username": "admin1", "password": "admin1", "name": "admin1", "email": "admin1@flay.com", "type": "ADMIN" },
   { "username": "admin2", "password": "admin2", "name": "admin2", "email": "admin2@flay.com", "type": "ADMIN" },
-  ]);
+]);
+print("Admin users inserted successfully");
 
-var admin1 = db.users.findOne({"username": "admin1"});
-var admin2 = db.users.findOne({"username": "admin2"});
+var admin1 = db.users.findOne({ "username": "admin1" });
+var admin2 = db.users.findOne({ "username": "admin2" });
 
 db.buildings.insertMany([
-  {"name": "Celenia 1", "address": "Mendoza 2656", "common_spaces": [{"name": "terraza", "type": "terrace"}, {"name": "salon", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
-  {"name": "Celenia 2", "address": "Cordoba 743", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin2._id, "name": admin2.name}},
-  {"name": "Fuerte apache", "address": "Jujuy 203", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
-  {"name": "MAUI", "address": "Cerrito 1442", "common_spaces": [{"name": "salon 1", "type": "lounge"}, {"name": "salon 2", "type": "lounge"}], "admin": {"_id": admin1._id, "name": admin1.name}},
+  { "name": "Celenia 1", "address": "Mendoza 2656", "common_spaces": [{ "name": "terraza", "type": "terrace" }, { "name": "salon", "type": "lounge" }], "admin": { "_id": admin1._id, "name": admin1.name } },
+  { "name": "Celenia 2", "address": "Cordoba 743", "common_spaces": [{ "name": "salon 1", "type": "lounge" }, { "name": "salon 2", "type": "lounge" }], "admin": { "_id": admin2._id, "name": admin2.name } },
+  { "name": "Fuerte apache", "address": "Jujuy 203", "common_spaces": [{ "name": "salon 1", "type": "lounge" }, { "name": "salon 2", "type": "lounge" }], "admin": { "_id": admin1._id, "name": admin1.name } },
+  { "name": "MAUI", "address": "Cerrito 1442", "common_spaces": [{ "name": "salon 1", "type": "lounge" }, { "name": "salon 2", "type": "lounge" }], "admin": { "_id": admin1._id, "name": admin1.name } },
 ]);
+print("Buildings inserted successfully");
 
-var celenia1 = db.buildings.findOne({"name": "Celenia 1"});
-var celenia2 = db.buildings.findOne({"name": "Celenia 2"});
-var fuerteApache = db.buildings.findOne({"name": "Fuerte apache"});
-var MAUI = db.buildings.findOne({"name": "MAUI"});
+
+var celenia1 = db.buildings.findOne({ "name": "Celenia 1" });
+var celenia2 = db.buildings.findOne({ "name": "Celenia 2" });
+var fuerteApache = db.buildings.findOne({ "name": "Fuerte apache" });
+var MAUI = db.buildings.findOne({ "name": "MAUI" });
 
 db.users.insertMany([
-  { "username": "owner1", "password": "owner1", "name": "owner1", "email": "owner1@flay.com", "type": "OWNER" , "building": {"_id": celenia1._id, "name": celenia1.name }  },
-  { "username": "owner2", "password": "owner2", "name": "owner2", "email": "owner2@flay.com", "type": "OWNER" , "building": {"_id": celenia1._id, "name": celenia1.name }  },
+  { "username": "owner1", "password": "owner1", "name": "owner1", "email": "owner1@flay.com", "type": "OWNER", "building": { "_id": celenia1._id, "name": celenia1.name } },
+  { "username": "owner2", "password": "owner2", "name": "owner2", "email": "owner2@flay.com", "type": "OWNER", "building": { "_id": celenia1._id, "name": celenia1.name } },
 ]);
+print("Owners users inserted successfully");
 
-var owner1 = db.users.findOne({"username": "owner1"});
-var owner2 = db.users.findOne({"username": "owner2"});
+
+var owner1 = db.users.findOne({ "username": "owner1" });
+var owner2 = db.users.findOne({ "username": "owner2" });
 
 db.apartments.insertMany([
-  {"owner":{"_id": owner1._id, "name": owner1.name}, "floor": 1, "flat": "A", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"owner":{"_id": owner1._id, "name": owner1.name}, "floor": 1, "flat": "B", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"owner":{"_id": owner1._id, "name": owner1.name}, "floor": 2, "flat": "C", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"owner":{"_id": owner2._id, "name": owner2.name}, "floor": 3, "flat": "D", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"owner":{"_id": owner2._id, "name": owner2.name}, "floor": 4, "flat": "B", "building": {"_id": celenia1._id, "name": celenia1.name}},
-  {"owner":{"_id": owner2._id, "name": owner2.name}, "floor": 9, "flat": "C", "building": {"_id": celenia1._id, "name": celenia1.name}}
+  { "owner": { "_id": owner1._id, "name": owner1.name }, "floor": 1, "flat": "A", "building": { "_id": celenia1._id, "name": celenia1.name } },
+  { "owner": { "_id": owner1._id, "name": owner1.name }, "floor": 1, "flat": "B", "building": { "_id": celenia1._id, "name": celenia1.name } },
+  { "owner": { "_id": owner1._id, "name": owner1.name }, "floor": 2, "flat": "C", "building": { "_id": celenia1._id, "name": celenia1.name } },
+  { "owner": { "_id": owner2._id, "name": owner2.name }, "floor": 3, "flat": "D", "building": { "_id": celenia1._id, "name": celenia1.name } },
+  { "owner": { "_id": owner2._id, "name": owner2.name }, "floor": 4, "flat": "B", "building": { "_id": celenia1._id, "name": celenia1.name } },
+  { "owner": { "_id": owner2._id, "name": owner2.name }, "floor": 9, "flat": "C", "building": { "_id": celenia1._id, "name": celenia1.name } }
 ]);
+print("Apartments inserted successfully");
 
-var celenia11A = db.apartments.findOne({"building._id": celenia1._id, "flat": "A", "floor": 1});
-var celenia11B = db.apartments.findOne({"building._id": celenia1._id, "flat": "B", "floor": 1});
-var celenia12C = db.apartments.findOne({"building._id": celenia1._id, "flat": "C", "floor": 2});
-var celenia14B = db.apartments.findOne({"building._id": celenia1._id, "flat": "B", "floor": 4});
+
+var celenia11A = db.apartments.findOne({ "building._id": celenia1._id, "flat": "A", "floor": 1 });
+var celenia11B = db.apartments.findOne({ "building._id": celenia1._id, "flat": "B", "floor": 1 });
+var celenia12C = db.apartments.findOne({ "building._id": celenia1._id, "flat": "C", "floor": 2 });
+var celenia14B = db.apartments.findOne({ "building._id": celenia1._id, "flat": "B", "floor": 4 });
 
 db.users.insertMany([
-  { "username": "user1",  "password": "user1",  "name": "user1",  "email": "user1@flay.com" , "type": "RENTER", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat}  },
-  { "username": "user2",  "password": "user2",  "name": "user2" , "email": "user2@flay.com" , "type": "RENTER", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat}  } ,
-  { "username": "inqui1", "password": "inqui1", "name": "inqui1", "email": "inqui1@flay.com", "type": "RENTER", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat}  },
-  { "username": "inqui2", "password": "inqui2", "name": "inqui2", "email": "inqui2@flay.com", "type": "RENTER", "building": {"_id": celenia1._id, "name": celenia1.name }, "apartment": {"_id": celenia14B._id, "name": celenia14B.floor + "-" + celenia14B.flat}  },
+  { "username": "user1", "password": "user1", "name": "user1", "email": "user1@flay.com", "type": "RENTER", "building": { "_id": celenia1._id, "name": celenia1.name }, "apartment": { "_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat } },
+  { "username": "user2", "password": "user2", "name": "user2", "email": "user2@flay.com", "type": "RENTER", "building": { "_id": celenia1._id, "name": celenia1.name }, "apartment": { "_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat } },
+  { "username": "inqui1", "password": "inqui1", "name": "inqui1", "email": "inqui1@flay.com", "type": "RENTER", "building": { "_id": celenia1._id, "name": celenia1.name }, "apartment": { "_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat } },
+  { "username": "inqui2", "password": "inqui2", "name": "inqui2", "email": "inqui2@flay.com", "type": "RENTER", "building": { "_id": celenia1._id, "name": celenia1.name }, "apartment": { "_id": celenia14B._id, "name": celenia14B.floor + "-" + celenia14B.flat } },
 ]);
+print("Renter users inserted successfully");
 
-var user1 = db.users.findOne({"username": "user1"});
-var user2 = db.users.findOne({"username": "user2"});
-var inqui1 = db.users.findOne({"username": "inqui1"});
-var inqui2 = db.users.findOne({"username": "inqui2"});
+
+var user1 = db.users.findOne({ "username": "user1" });
+var user2 = db.users.findOne({ "username": "user2" });
+var inqui1 = db.users.findOne({ "username": "inqui1" });
+var inqui2 = db.users.findOne({ "username": "inqui2" });
 
 db.penalties.insertMany([
-  {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z")},
-  {"user": {"_id": inqui1["_id"], "name": inqui1["name"]}, "penalty_type": "BOOKING", "cause": "cagar en el palier", "amount": 0, "start_date": new ISODate("2022-05-15T06:31:15Z"), "end_date": new ISODate("2022-06-15T06:31:15Z")},
+  { "user": { "_id": inqui1["_id"], "name": inqui1["name"] }, "penalty_type": "CASH_FINE", "cause": "cagar en el ascensor", "amount": 30000, "start_date": new ISODate("2022-01-15T06:31:15Z"), "end_date": new ISODate("2022-04-15T06:31:15Z") },
+  { "user": { "_id": inqui1["_id"], "name": inqui1["name"] }, "penalty_type": "BOOKING", "cause": "cagar en el palier", "amount": 0, "start_date": new ISODate("2022-05-15T06:31:15Z"), "end_date": new ISODate("2022-06-15T06:31:15Z") },
 ]);
+print("Penalties inserted successfully");
+
 
 db.bookings.insertMany([
-  {"user": {"_id": user1._id, "name": user1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2023-12-01T06:31:15Z"), "shift": "TARDE"},
-  {"user": {"_id": user2._id, "name": user2.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2023-12-09T06:32:15Z"), "shift": "NOCHE"},
-  {"user": {"_id": inqui1._id, "name": inqui1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "common_space": "terraza", "date": new ISODate("2023-12-01T20:10:15Z"), "shift": "TARDE"},
-
+  { "user": { "_id": user1._id, "name": user1.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "common_space": "terraza", "date": new ISODate("2023-12-01T06:31:15Z"), "shift": "TARDE" },
+  { "user": { "_id": user2._id, "name": user2.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "common_space": "terraza", "date": new ISODate("2023-12-09T06:32:15Z"), "shift": "NOCHE" },
+  { "user": { "_id": inqui1._id, "name": inqui1.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "common_space": "terraza", "date": new ISODate("2023-12-01T20:10:15Z"), "shift": "TARDE" },
 ]);
+print("Bookings inserted successfully");
+
 
 db.announcements.insertMany([
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "LOW anuncio de la ADMIN", "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-12-12T06:31:15Z"), "severity": "LOW"},
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "HIGH anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "HIGH"},
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "NORMAL anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "NORMAL"},
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": celenia1._id, "name": celenia1.name}, "title": "INFO anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "INFO"},
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": fuerteApache._id, "name": fuerteApache.name}, "title": "INFO anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2023-12-11T06:31:15Z"), "severity": "INFO"},
-  {"user": {"_id": admin1._id, "name": admin1.name}, "building": {"_id": MAUI._id, "name": MAUI.name}, "title": "INFO anuncio de la ADMIN","message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2023-12-11T06:31:15Z"), "severity": "INFO"},
+  { "user": { "_id": admin1._id, "name": admin1.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "title": "LOW anuncio de la ADMIN", "message": "esto es un anuncio de la administracion. jajajj xd", "date": new ISODate("2022-12-12T06:31:15Z"), "severity": "LOW" },
+  { "user": { "_id": admin1._id, "name": admin1.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "title": "HIGH anuncio de la ADMIN", "message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "HIGH" },
+  { "user": { "_id": admin1._id, "name": admin1.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "title": "NORMAL anuncio de la ADMIN", "message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "NORMAL" },
+  { "user": { "_id": admin1._id, "name": admin1.name }, "building": { "_id": celenia1._id, "name": celenia1.name }, "title": "INFO anuncio de la ADMIN", "message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2022-12-11T06:31:15Z"), "severity": "INFO" },
+  { "user": { "_id": admin1._id, "name": admin1.name }, "building": { "_id": fuerteApache._id, "name": fuerteApache.name }, "title": "INFO anuncio de la ADMIN", "message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2023-12-11T06:31:15Z"), "severity": "INFO" },
+  { "user": { "_id": admin1._id, "name": admin1.name }, "building": { "_id": MAUI._id, "name": MAUI.name }, "title": "INFO anuncio de la ADMIN", "message": "Texto del anuncio numero 2 para este edificio voy a hacerlo re lago a ver como se acomoda en la web, deberia aparecer todo el texto y no cortado asi que veremos si se puede acomodar o no.", "date": new ISODate("2023-12-11T06:31:15Z"), "severity": "INFO" },
 ]);
+print("Annpuncements inserted successfully");
+
+
+db.expenses.insertMany([
+  { "filename": "example1.txt", "unit": { "_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT1"), },
+  { "filename": "example2.txt", "unit": { "_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT2"), },
+  { "filename": "example3.txt", "unit": { "_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT3"), },
+]);
+print("Expenses inserted successfully");
+
