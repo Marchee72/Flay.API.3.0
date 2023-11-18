@@ -8,6 +8,7 @@ use("Flay");
 
 // The drop() command destroys all data from a collection.
 // Make sure you run it against the correct database and collection.
+
 db.users.drop();
 db.buildings.drop();
 db.penalties.drop();
@@ -108,11 +109,20 @@ db.announcements.insertMany([
 ]);
 print("Annpuncements inserted successfully");
 
+const expList = [];
+for (let month = 1; month <= 12; month++) {
+  const exp1 = { "filename": "example1.txt", "unit": { "_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT1"), };
+  const exp2 = { "filename": "example2.txt", "unit": { "_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT2"), };
+  const exp3 = { "filename": "example3.txt", "unit": { "_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT3"), };
+  expList.push(exp1, exp2, exp3);
+}
 
-db.expenses.insertMany([
-  { "filename": "example1.txt", "unit": { "_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT1"), },
-  { "filename": "example2.txt", "unit": { "_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT2"), },
-  { "filename": "example3.txt", "unit": { "_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT3"), },
-]);
+db.expenses.insertMany(expList)
+
+// db.expenses.insertMany([
+//   { "filename": "example1.txt", "unit": { "_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT1"), },
+//   { "filename": "example2.txt", "unit": { "_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT2"), },
+//   { "filename": "example3.txt", "unit": { "_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": new Date().getMonth() - 1, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT3"), },
+// ]);
 print("Expenses inserted successfully");
 
