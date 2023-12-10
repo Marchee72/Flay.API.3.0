@@ -111,9 +111,9 @@ print("Annpuncements inserted successfully");
 
 const expList = [];
 for (let month = 1; month <= 12; month++) {
-  const exp1 = { "filename": "example1.txt", "unit": { "_id": celenia11A._id, "name": celenia11A.floor + "-" + celenia11A.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT1"), };
-  const exp2 = { "filename": "example2.txt", "unit": { "_id": celenia11B._id, "name": celenia11B.floor + "-" + celenia11B.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT2"), };
-  const exp3 = { "filename": "example3.txt", "unit": { "_id": celenia12C._id, "name": celenia12C.floor + "-" + celenia12C.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT3"), };
+  const exp2 = { "filename": "example2.txt", "unit": { "floor": celenia11B.floor, "apartment": celenia11B.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT2"), };
+  const exp3 = { "filename": "example3.txt", "unit": { "floor": celenia12C.floor, "apartment": celenia12C.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT3"), };
+  const exp1 = { "filename": "example1.txt", "unit": { "floor": celenia11A.floor, "apartment": celenia11A.flat }, "building": { "_id": celenia1._id, "name": celenia1.name }, "date": new Date(), "month": month, "year": new Date().getFullYear(), "file": BinData(0, "BASE64_ENCODED_FILE_CONTENT1"), };
   expList.push(exp1, exp2, exp3);
 }
 
